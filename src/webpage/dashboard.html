@@ -11,7 +11,7 @@
         
         <!-- User Greeting -->
         <section id="greeting">
-            <h1>Welcome, [User's Name]</h1>
+            <h1 id="usernameGreeting">Welcome</h1>
         </section>
         
         <!-- Weekly Summary -->
@@ -47,6 +47,12 @@
     </div>
 
     <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
+        }
+        });
         // Dummy data
         const dailyData = [
             { timestamp: "08:00", heartRate: 72, bloodOxygen: 98 },

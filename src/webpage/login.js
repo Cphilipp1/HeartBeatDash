@@ -14,9 +14,11 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(data => {
         if (data.token) {
-            // Store token and redirect user
+            console.log(data);
+            localStorage.setItem('username', email);
+            window.location.href = "dashboard.html";
         } else {
-            // Handle error
+            console.log(data)
         }
     });
 });
