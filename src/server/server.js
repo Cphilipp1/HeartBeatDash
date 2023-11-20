@@ -19,7 +19,13 @@ const recordingSchema = new mongoose.Schema({
 
 const Recording = mongoose.model('Recording', recordingSchema);
 
-// Login API
+app.post('/heartData', async (req, res) => {
+  console.log("Debug: Inside POST /api/heartInfo");
+  console.log(req);
+  console.log(req.body);
+  console.log("We made it");
+});
+
 app.post('/api/login', async (req, res) => {
   console.log("Debug: Inside POST /api/login");
   console.log(req.body);
@@ -47,7 +53,6 @@ app.post('/api/login', async (req, res) => {
   const token = jwt.sign({ id: records._id }, 'your-secret-key', { expiresIn: '1h' });
   res.status(200).json({ token });
 });
-
 
 app.post('/api/register', async (req, res) => {
   console.log("Debug: Inside POST /api/register");
