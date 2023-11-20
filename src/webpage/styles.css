@@ -27,7 +27,7 @@ label {
     margin-bottom: 0.25em;
 }
 
-input[type="email"], input[type="password"] {
+input[type="email"], input[type="password"], input[type="deviceId"] {
     width: 95%;
     padding: 2%;
     margin-bottom: 1.25em;

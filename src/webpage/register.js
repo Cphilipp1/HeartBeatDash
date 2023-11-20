@@ -3,6 +3,8 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
 
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
+    const deviceId = document.getElementById('deviceId').value;
+    // e00fce6869b0c02b15eef17b
     const confirmPassword = document.getElementById('confirmPassword').value;
 
     // Validate that password and confirmPassword are the same
@@ -16,7 +18,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password, deviceId })
     })
     .then(response => response.json())
     .then(data => {
