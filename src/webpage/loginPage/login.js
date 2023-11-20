@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         if (data.token) {
             console.log(data);
             localStorage.setItem('username', email);
-            window.location.href = "dashboard.html";
+            window.location.href = "../dashboardPage/dashboard.html";
         } else {
             console.log(data)
         }

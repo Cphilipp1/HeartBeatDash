@@ -32,4 +32,13 @@ const deviceDataSchema = new mongoose.Schema({
 
 const DeviceData = mongoose.model('DeviceData', deviceDataSchema);
 
-module.exports = DeviceData;
+
+const recordingSchema = new mongoose.Schema({
+    userName: String, 
+    password: String,
+    deviceId: String
+});
+  
+const LoginData = mongoose.model('LoginData', recordingSchema);
+
+module.exports = { DeviceData, LoginData };

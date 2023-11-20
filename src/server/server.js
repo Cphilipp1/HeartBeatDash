@@ -1,12 +1,13 @@
+const mongoose = require('mongoose');
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
-const DeviceData = require('./datamodels'); 
-
+const { DeviceData, LoginData } = require('./datamodels');
 
 const app = express();
 const port = 3000;
@@ -15,13 +16,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
-const recordingSchema = new mongoose.Schema({
-  userName: String, 
-  password: String,
-  deviceId: String
-});
-
-const LoginData = mongoose.model('LoginData', recordingSchema);
 
 app.post('/heartData', async (req, res) => {
   try {
@@ -101,15 +95,48 @@ app.post('/api/register', async (req, res) => {
 
   // Insert the user into the database
   try {
-    const newRecord = new LoginData({ userName: email, password: hashedPassword, deviceId: deviceId});
-    let mesg = await newRecord.save();
-    console.log('User inserted with mesg ' + mesg);
+    const newLogin = new LoginData({ userName: email, password: hashedPassword, deviceId: deviceId});
+
+    let loginmsg = await newLogin.save();
+    console.log('User inserted with mesg ' + loginmsg);
+
+    let newDeviceData = new DeviceData({deviceId: deviceId, readings: []})
+    let deviceDataemesg = await newDeviceData.save();
+    console.log('Device Data inserted with mesg ' + deviceDataemesg);
+
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
     console.error('Failed to insert user:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.post('/api/getDeviceData', async (req, res) => {
+  try {
+    const { userName } = req.body;
+
+    // Find the user's login data to get the deviceId
+    const loginData = await LoginData.findOne({ userName: userName });
+
+    if (!loginData) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Use the deviceId to get the device data
+    const deviceData = await DeviceData.findOne({ deviceId: loginData.deviceId });
+
+    if (!deviceData) {
+      return res.status(404).json({ error: 'Device data not found' });
+    }
+
+    // Send the readings back
+    res.status(200).json({ readings: deviceData.readings });
+  } catch (error) {
+    console.error("Error in /api/getDeviceData endpoint:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 // Start Server
 app.listen(port, () => {
