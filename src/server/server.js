@@ -24,6 +24,7 @@ app.post('/heartData', async (req, res) => {
   console.log(req);
   console.log(req.body);
   console.log("We made it");
+  res.status(200).json({ message: 'endpoint exists!' });
 });
 
 app.post('/api/login', async (req, res) => {
