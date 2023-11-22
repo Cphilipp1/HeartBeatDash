@@ -8,21 +8,19 @@
 </head>
 <body>
     <div id="container">
-        
-        <!-- User Greeting -->
         <section id="greeting">
             <h1 id="usernameGreeting">Welcome</h1>
+            <button id="logoutButton">Logout</button>
         </section>
         
-        <!-- Weekly Summary -->
         <section id="weeklySummary">
             <h2>Weekly Summary</h2>
-            <p>Average Heart Rate: [Value]</p>
-            <p>Minimum Heart Rate: [Value]</p>
-            <p>Maximum Heart Rate: [Value]</p>
-            <p>Average Blood Oxygen Level: [Value]</p>
-            <p>Minimum Blood Oxygen Level: [Value]</p>
-            <p>Maximum Blood Oxygen Level: [Value]</p>
+            <p>Average Heart Rate: <span id="avgHeartRate">[Value]</span></p>
+            <p>Minimum Heart Rate: <span id="minHeartRate">[Value]</span></p>
+            <p>Maximum Heart Rate: <span id="maxHeartRate">[Value]</span></p>
+            <p>Average Blood Oxygen Level: <span id="avgBloodOxygen">[Value]</span></p>
+            <p>Minimum Blood Oxygen Level: <span id="minBloodOxygen">[Value]</span></p>
+            <p>Maximum Blood Oxygen Level: <span id="maxBloodOxygen">[Value]</span></p>
         </section>
 
         <section id="measurementSettings">
@@ -38,7 +36,6 @@
             </form>
         </section>
 
-        <!-- Detailed Daily View -->
         <section id="dailyView">
             <h2>Detailed Daily View</h2>
             <canvas id="heartRateChart"></canvas>
@@ -47,11 +44,14 @@
     </div>
 
     <script>
+        let heartRateChart;
+        let bloodOxygenChart;
+        let allReadings = [];
+
         window.addEventListener('DOMContentLoaded', async (event) => {
             const username = localStorage.getItem('username');
             if (username) {
                 document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
-
                 try {
                     const response = await fetch('http://localhost:3000/api/getDeviceData', {
                         method: 'POST',
@@ -64,25 +64,80 @@
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
-
                     const data = await response.json();
-
-                    // Assuming 'data' contains an array of readings
                     updateCharts(data.readings);
+                    allReadings = data.readings; // Store fetched readings
+                    updateCharts(allReadings); // Initial chart update
                 } catch (error) {
                     console.error('Error fetching device data:', error);
                 }
             }
         });
 
+        document.getElementById('settingsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            filterAndUpdateCharts();
+        });
+
+        function filterAndUpdateCharts() {
+            if (heartRateChart) heartRateChart.destroy();
+            if (bloodOxygenChart) bloodOxygenChart.destroy();
+            const startTimeInput = document.getElementById('startTime').value;
+            const endTimeInput = document.getElementById('endTime').value;
+            const frequency = parseInt(document.getElementById('frequency').value) || 1;
+
+            let filteredReadings = allReadings.filter(reading => {
+                const readingDate = new Date(reading.timestamp);
+                const readingHour = readingDate.getHours();
+                const readingMinutes = readingDate.getMinutes();
+
+                const [startHour, startMinutes] = startTimeInput ? startTimeInput.split(':').map(Number) : [0, 0];
+                const [endHour, endMinutes] = endTimeInput ? endTimeInput.split(':').map(Number) : [23, 59];
+
+                return (readingHour > startHour || (readingHour === startHour && readingMinutes >= startMinutes)) &&
+                    (readingHour < endHour || (readingHour === endHour && readingMinutes <= endMinutes));
+            });
+
+            filteredReadings = filteredReadings.filter((_, index) => index % frequency === 0);
+
+            updateCharts(filteredReadings);
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = '../index.html';
+        });
+
+        function calculateAverage(data) {
+            if (data.length === 0) return 0;
+            const sum = data.reduce((a, b) => a + b, 0);
+            return sum / data.length;
+        }
+
         function updateCharts(readings) {
             const labels = readings.map(reading => reading.timestamp);
             const heartRateData = readings.map(reading => reading.heartRate);
             const bloodOxygenData = readings.map(reading => reading.bloodOxygen);
 
-            // Update Heart Rate Chart
+            const avgHeartRate = calculateAverage(heartRateData);
+            const minHeartRate = Math.min(...heartRateData);
+            const maxHeartRate = Math.max(...heartRateData);
+
+            const avgBloodOxygen = calculateAverage(bloodOxygenData);
+            const minBloodOxygen = Math.min(...bloodOxygenData);
+            const maxBloodOxygen = Math.max(...bloodOxygenData);
+
+            document.getElementById('avgHeartRate').textContent = avgHeartRate.toFixed(2);
+            document.getElementById('minHeartRate').textContent = minHeartRate;
+            document.getElementById('maxHeartRate').textContent = maxHeartRate;
+
+            document.getElementById('avgBloodOxygen').textContent = avgBloodOxygen.toFixed(2);
+            document.getElementById('minBloodOxygen').textContent = minBloodOxygen;
+            document.getElementById('maxBloodOxygen').textContent = maxBloodOxygen;
+
             const ctx1 = document.getElementById('heartRateChart').getContext('2d');
-            const heartRateChart = new Chart(ctx1, {
+            heartRateChart = new Chart(ctx1, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -96,9 +151,8 @@
                 }
             });
 
-            // Update Blood Oxygen Chart
             const ctx2 = document.getElementById('bloodOxygenChart').getContext('2d');
-            const bloodOxygenChart = new Chart(ctx2, {
+            bloodOxygenChart = new Chart(ctx2, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -111,7 +165,7 @@
                     }]
                 }
             });
-        }
+        }        
     </script>
 </body>
 </html>

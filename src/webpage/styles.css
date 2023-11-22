@@ -88,7 +88,22 @@ a:hover {
     color: #555;
 }
 
-/* Style for the values in the paragraphs */
 #weeklySummary p span {
     font-weight: bold;
+}
+
+#logoutButton {
+    background-color: #dc3545; /* Red color for logout button */
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    cursor: pointer;
+    float: right; /* Optional: to align the button to the right */
+    margin-top: 1em; /* Optional: for spacing */
+}
+
+#logoutButton:hover {
+    background-color: #bd2130;
 }
