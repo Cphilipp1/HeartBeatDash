@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Track - Register</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Register new Device</h1>
+        <form id="registerForm">
+            <label for="deviceId">Device ID:</label>
+            <input type="deviceId" id="deviceId" placeholder="Ex: e00fce6869b0c02b15eef17b" required>
+            <br>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+    <div id="registeredDevices">
+        <h2>Registered Devices</h2>
+        <ul id="deviceList"></ul>
+    </div>  
+    <script src="device.js"></script>
+</body>
+</html>

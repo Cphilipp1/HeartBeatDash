@@ -107,3 +107,85 @@ a:hover {
 #logoutButton:hover {
     background-color: #bd2130;
 }
+
+#sidebar {
+    position: fixed;
+    left: -50%; 
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background: #333;
+    transition: left 0.3s;  
+    padding: 1em;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 0.5em 0;
+}
+
+#sidebar button {
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+#content {
+    margin-left: 0;
+    transition: margin-left 0.3s;
+}
+
+.sidebar-expanded #sidebar {
+    left: 0;
+}
+
+.sidebar-expanded #content {
+    margin-left: 20%;
+}
+
+#registeredDevices {
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+#registeredDevices h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+#registeredDevices ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+}
+
+#registeredDevices ul li {
+    background-color: #fff;
+    padding: 0.5em 1em;
+    margin-bottom: 0.5em;
+    border-radius: 0.25em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#toggleSidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: left 0.3s;
+    /* Add additional styling here if needed */
+}
+
+/* .sidebar-expanded #toggleSidebar {
+    left: 250px; /* Adjust to match your sidebar's width 
+} */
+

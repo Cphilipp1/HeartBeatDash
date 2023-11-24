@@ -15,28 +15,21 @@ const readingSchema = new mongoose.Schema({
     }
   });
 
-
 const deviceDataSchema = new mongoose.Schema({
-    deviceId: {
+    userName: {
       type: String,
-      required: true,
-      unique: true
-    },
+      required: true
+    }, 
+    deviceIds: [String],
     readings: [readingSchema]
-    // Optionally, add a reference to the User model if applicable
-    // userId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'User'
-    // }
   });
 
 const DeviceData = mongoose.model('DeviceData', deviceDataSchema);
 
-
 const recordingSchema = new mongoose.Schema({
     userName: String, 
     password: String,
-    deviceId: String
+    deviceIds: [String]
 });
   
 const LoginData = mongoose.model('LoginData', recordingSchema);

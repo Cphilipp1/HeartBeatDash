@@ -7,10 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div id="sidebar">
+        <button id="toggleSidebar">></button>
+        <ul>
+            <li><button id="addDeviceButton">Add/Remove Device</button></li>
+            <li><button id="changePasswordButton">Change Password</button></li>
+            <li><button id="logoutButton">Logout</button></li>
+        </ul>
+    </div>
+
     <div id="container">
         <section id="greeting">
             <h1 id="usernameGreeting">Welcome</h1>
-            <button id="logoutButton">Logout</button>
         </section>
         
         <section id="weeklySummary">
@@ -47,6 +55,20 @@
         let heartRateChart;
         let bloodOxygenChart;
         let allReadings = [];
+
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            // document.body.classList.toggle('sidebar-expanded');
+            const sidebarExpanded = document.body.classList.toggle('sidebar-expanded');
+            this.textContent = sidebarExpanded ? '<' : '>';
+        });
+
+        document.getElementById('addDeviceButton').addEventListener('click', function() {
+            window.location.href = "../registerPage/device.html";
+        });
+
+        document.getElementById('changePasswordButton').addEventListener('click', function() {
+            window.location.href = "../registerPage/password.html";
+        });
 
         window.addEventListener('DOMContentLoaded', async (event) => {
             const username = localStorage.getItem('username');
