@@ -30,15 +30,19 @@ app.post('/heartData', async (req, res) => {
       }
 
       // Find the user who has the matching device ID
-      const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
 
+      const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
+      console.log("inside webhook with payload:")
+      console.log(req.body)
       if (userWithDevice) {
+        console.log("FOUND USER")
           // Append the new reading to the user's data
           userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date() });
           await userWithDevice.save();
 
           res.status(200).json({ message: 'Data updated successfully!' });
       } else {
+          console.log("NO USER FOUND")
           res.status(404).json({ message: 'Device not found' });
       }
   } catch (error) {
