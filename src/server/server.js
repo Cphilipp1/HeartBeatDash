@@ -111,10 +111,10 @@ app.post('/api/register', async (req, res) => {
 });
 
 
-app.post('/api/getDeviceData', async (req, res) => {
+app.get('/api/getDeviceData/:userName', async (req, res) => {
   try {
     console.log("INSIDE GETDEVICEDATA");
-    const { userName } = req.body;
+    const userName = req.params.userName;
 
     // Find the user's login data to get the deviceId
     const loginData = await LoginData.findOne({ userName: userName });

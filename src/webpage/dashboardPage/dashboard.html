@@ -77,13 +77,16 @@
             if (username) {
                 document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
                 try {
-                    const response = await fetch('http://3.12.231:3000/api/getDeviceData', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ userName: username })
-                    });
+                    fetch('http://3.12.231:3000/api/getDeviceData/${username}')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                    })
                     console.log("fetched Data:" + response.body)
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
