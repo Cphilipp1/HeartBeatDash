@@ -71,7 +71,9 @@
         });
 
         window.addEventListener('DOMContentLoaded', async (event) => {
+            console.log("Before username")
             const username = localStorage.getItem('username');
+            console.log("username is :" + username)
             if (username) {
                 document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
                 try {
