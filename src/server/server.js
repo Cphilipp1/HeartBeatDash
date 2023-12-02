@@ -25,7 +25,13 @@ app.post('/heartData', async (req, res) => {
       console.log("Debug: Inside POST /heartData");
       // Check API Key
       console.log(req.body);
-      const { deviceId, heartRate, bloodOxygen, apiKey } = req.body;
+      const parsedData = JSON.parse(req.body.data);
+
+      // Extract values and assign them to variables
+      const deviceId = parsedData.deviceId;
+      const heartRate = parsedData.heartRate;
+      const bloodOxygen = parsedData.bloodOxygen;
+      const apiKey = parsedData.apiKey;
       console.log(
         "after assignment"
       )
