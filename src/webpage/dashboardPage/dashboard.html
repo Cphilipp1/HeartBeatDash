@@ -77,21 +77,16 @@
             if (username) {
                 document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
                 try {
-                    fetch('http://3.12.231:3000/api/getDeviceData/${username}')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log(data);
-                    })
-                    console.log("fetched Data:" + response.body)
+                    // Using template literals for dynamic URL
+                    const response = await fetch(`http://3.12.231:3000/api/getDeviceData/${username}`);
+                    
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
+
                     const data = await response.json();
+                    console.log(data);
+
                     updateCharts(data.readings);
                     allReadings = data.readings; // Store fetched readings
                     updateCharts(allReadings); // Initial chart update
