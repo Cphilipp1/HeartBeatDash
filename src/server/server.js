@@ -17,7 +17,6 @@ app.use(cors({
   origin: '*'
 }));
 
-
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.post('/heartData', async (req, res) => {
