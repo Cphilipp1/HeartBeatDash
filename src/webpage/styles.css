@@ -6,9 +6,9 @@ body, h1, h2, h3, h4, h5, h6, p, form, button {
 
 /* Make a background color for the page */
 body {
-    background-color: #FFF3E0; /* Light orange background */
+    background-color: #fff; /* White background */
     font-family: Arial, sans-serif;
-    color: #333; /* Darker text for contrast */
+    color: #333; /* Dark text for contrast */
 }
 
 /* Center the container */
@@ -16,7 +16,7 @@ body {
     width: 90%;
     max-width: 40em;
     margin: 2em auto;
-    background-color: #ffffff;
+    background-color: #fff;
     padding: 1em;
     border-radius: 0.5em;
     box-shadow: 0 0.25em 0.375em rgba(0, 0, 0, 0.1);
@@ -27,21 +27,21 @@ label {
     display: block;
     font-weight: bold;
     margin-bottom: 0.25em;
-    color: #FF6F00; /* Dark orange for labels */
+    color: #D32F2F; /* Dark red for labels */
 }
 
 input[type="email"], input[type="password"], input[type="deviceId"], input[type="time"], input[type="number"] {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
-    border: 1px solid #FFB74D; /* Lighter orange for borders */
+    border: 1px solid #E57373; /* Light red for borders */
     border-radius: 0.25em;
     font-size: 1em;
 }
 
 /* Style the button */
 button {
-    background-color: #FF6F00; /* Orange background for buttons */
+    background-color: #D32F2F; /* Red background for buttons */
     color: white;
     border: none;
     border-radius: 0.25em;
@@ -52,16 +52,16 @@ button {
 }
 
 button:hover {
-    background-color: #E65100; /* Darker orange on hover */
+    background-color: #B71C1C; /* Darker red on hover */
 }
 
 /* Add some spacing and font styling */
 p, a {
-    color: #555; /* Slightly lighter text */
+    color: #555; /* Slightly darker text for readability */
 }
 
 a {
-    color: #FF6F00; /* Orange links */
+    color: #D32F2F; /* Red links */
     text-decoration: none;
 }
 
@@ -71,7 +71,7 @@ a:hover {
 
 /* Styling for sections */
 #weeklySummary, #measurementSettings, #dailyView, #registeredDevices {
-    background-color: #FFF8E1; /* Very light orange for sections */
+    background-color: #FFEBEE; /* Very light red for sections */
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -79,12 +79,12 @@ a:hover {
 }
 
 h2 {
-    color: #FF6F00; /* Orange for headings */
+    color: #D32F2F; /* Red for headings */
 }
 
 /* Sidebar Styling */
 #sidebar {
-    background: #FF9800; /* Bright orange for the sidebar */
+    background: #E57373; /* Light red for the sidebar */
     /* Other styles remain the same */
 }
 
@@ -94,7 +94,8 @@ h2 {
 
 /* Toggle Sidebar Button */
 #toggleSidebar {
-    background-color: #FFB74D; /* Lighter orange for the toggle button */
+    background-color: #FFCDD2; /* Lighter red for the toggle button */
+    color: white; /* White text for contrast */
 }
 
 /* Responsive Design */
