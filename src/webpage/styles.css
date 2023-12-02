@@ -58,6 +58,8 @@ button:hover {
 
 /* Add some spacing and font styling */
 p, a {
+    margin-top: 1.25em;
+    font-size: 0.875em;
     color: #555; /* Slightly darker text for readability */
 }
 
@@ -81,12 +83,24 @@ a:hover {
 
 h2 {
     color: #D32F2F; /* Red for headings */
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+#weeklySummary p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #e84c4c;
+}
+
+#weeklySummary p span {
+    font-weight: bold;
 }
 
 /* Sidebar Styling */
 #sidebar {
     position: fixed;
-    left: -20%; /* Adjusted for correct initial position */
+    left: -50%; /* Adjusted for correct initial position */
     top: 0;
     width: 20%;
     height: 100%;
@@ -107,6 +121,19 @@ h2 {
     background-color: transparent;
     color: white;
     text-align: left;
+}
+
+#content {
+    margin-left: 0;
+    transition: margin-left 0.3s;
+}
+
+.sidebar-expanded #sidebar {
+    left: 0;
+}
+
+.sidebar-expanded #content {
+    margin-left: 20%;
 }
 
 /* Toggle Sidebar Button */
