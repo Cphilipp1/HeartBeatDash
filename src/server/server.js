@@ -24,11 +24,17 @@ app.post('/heartData', async (req, res) => {
   try {
       console.log("Debug: Inside POST /heartData");
       // Check API Key
+      console.log(req.body);
       const { deviceId, heartRate, bloodOxygen, apiKey } = req.body;
+      console.log(
+        "after assignment"
+      )
       if (apiKey !== "abcdefghijklmnop") {
         return res.status(401).json({ message: 'Invalid API key' });
       }
-
+      console.log(
+        "after key check"
+      )
       // Find the user who has the matching device ID
 
       const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
