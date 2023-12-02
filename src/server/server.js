@@ -23,8 +23,6 @@ mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: 
 app.post('/heartData', async (req, res) => {
   try {
       console.log("Debug: Inside POST /heartData");
-      // Check API Key
-      console.log(req.body);
       const parsedData = JSON.parse(req.body.data);
 
       // Extract values and assign them to variables
@@ -32,26 +30,17 @@ app.post('/heartData', async (req, res) => {
       const heartRate = parsedData.heartRate;
       const bloodOxygen = parsedData.bloodOxygen;
       const apiKey = parsedData.apiKey;
-      console.log(
-        "after assignment"
-      )
+    
       if (apiKey !== "abcdefghijklmnop") {
         return res.status(401).json({ message: 'Invalid API key' });
       }
-      console.log(
-        "after key check"
-      )
       // Find the user who has the matching device ID
-
       const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
-      console.log("inside webhook with payload:")
-      console.log(req.body)
       if (userWithDevice) {
-        console.log("FOUND USER")
           // Append the new reading to the user's data
           userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date() });
           await userWithDevice.save();
-
+          console.log("data saved");
           res.status(200).json({ message: 'Data updated successfully!' });
       } else {
           console.log("NO USER FOUND")
