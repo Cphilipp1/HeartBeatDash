@@ -112,6 +112,7 @@ app.post('/api/register', async (req, res) => {
 
 
 app.get('/api/getDeviceData/:userName', async (req, res) => {
+  console.log("INSIDE GETDEVICEDATA");
   try {
     console.log("INSIDE GETDEVICEDATA");
     const userName = req.params.userName;
