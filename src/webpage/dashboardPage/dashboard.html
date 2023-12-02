@@ -76,6 +76,10 @@
             console.log("username is :" + username)
             if (username) {
                 document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
+                let apiPath = `http://3.12.231:3000/api/getDeviceData/${username}`
+
+                console.log("about to fetch at: " + apiPath)
+                
                 try {
                     // Using template literals for dynamic URL
                     const response = await fetch(`http://3.12.231:3000/api/getDeviceData/${username}`);
