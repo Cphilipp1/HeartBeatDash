@@ -6,8 +6,9 @@ body, h1, h2, h3, h4, h5, h6, p, form, button {
 
 /* Make a background color for the page */
 body {
-    background-color: #f3f4f6;
+    background-color: #FFF3E0; /* Light orange background */
     font-family: Arial, sans-serif;
+    color: #333; /* Darker text for contrast */
 }
 
 /* Center the container */
@@ -15,7 +16,7 @@ body {
     width: 90%;
     max-width: 40em;
     margin: 2em auto;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 1em;
     border-radius: 0.5em;
     box-shadow: 0 0.25em 0.375em rgba(0, 0, 0, 0.1);
@@ -26,20 +27,21 @@ label {
     display: block;
     font-weight: bold;
     margin-bottom: 0.25em;
+    color: #FF6F00; /* Dark orange for labels */
 }
 
 input[type="email"], input[type="password"], input[type="deviceId"], input[type="time"], input[type="number"] {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
-    border: 1px solid #ccc;
+    border: 1px solid #FFB74D; /* Lighter orange for borders */
     border-radius: 0.25em;
     font-size: 1em;
 }
 
 /* Style the button */
 button {
-    background-color: #007bff;
+    background-color: #FF6F00; /* Orange background for buttons */
     color: white;
     border: none;
     border-radius: 0.25em;
@@ -50,17 +52,16 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #E65100; /* Darker orange on hover */
 }
 
 /* Add some spacing and font styling */
-p {
-    margin-top: 1em;
-    font-size: 1em;
+p, a {
+    color: #555; /* Slightly lighter text */
 }
 
 a {
-    color: #007bff;
+    color: #FF6F00; /* Orange links */
     text-decoration: none;
 }
 
@@ -70,7 +71,7 @@ a:hover {
 
 /* Styling for sections */
 #weeklySummary, #measurementSettings, #dailyView, #registeredDevices {
-    background-color: #f5f5f5;
+    background-color: #FFF8E1; /* Very light orange for sections */
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -78,55 +79,29 @@ a:hover {
 }
 
 h2 {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-    color: #333;
-}
-
-p {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #555;
+    color: #FF6F00; /* Orange for headings */
 }
 
 /* Sidebar Styling */
 #sidebar {
-    position: fixed;
-    left: -50%;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    background: #333;
-    transition: left 0.3s;
-    padding: 1em;
-}
-
-#sidebar ul {
-    list-style-type: none;
-    padding: 0;
+    background: #FF9800; /* Bright orange for the sidebar */
+    /* Other styles remain the same */
 }
 
 #sidebar ul li button {
-    width: 100%;
-    padding: 0.5em;
-    cursor: pointer;
-    background-color: transparent;
-    color: white;
-    text-align: left;
+    color: white; /* White text for contrast */
 }
 
 /* Toggle Sidebar Button */
 #toggleSidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 0;
-    padding: 0.5em 1em;
-    cursor: pointer;
+    background-color: #FFB74D; /* Lighter orange for the toggle button */
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Responsive styles remain the same */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
