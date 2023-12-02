@@ -17,6 +17,13 @@ app.use(cors({
   origin: '*'
 }));
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+  return date.toLocaleDateString('en-US', options) + ' ' + date.toLocaleTimeString('en-US', options);
+}
+
+
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.post('/heartData', async (req, res) => {
@@ -125,7 +132,10 @@ app.get('/api/getDeviceData/:userName', async (req, res) => {
 
     // Use the deviceId to get the device data
     const deviceData = await DeviceData.findOne({ deviceId: loginData.deviceId });
-
+    const formattedReadings = deviceData.readings.map(reading => ({
+      ...reading._doc,
+      timestamp: formatDate(reading.timestamp)
+    }));
     if (!deviceData) {
       return res.status(404).json({ error: 'Device data not found' });
     }
