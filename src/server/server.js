@@ -19,9 +19,11 @@ app.use(cors({
 
 function formatDate(dateString) {
   const date = new Date(dateString);
-  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-  return date.toLocaleDateString('en-US', options) + ' ' + date.toLocaleTimeString('en-US', options);
+  const optionsDate = { year: 'numeric', month: 'short', day: 'numeric' };
+  const optionsTime = { hour: '2-digit', minute: '2-digit', hour12: true };
+  return date.toLocaleDateString('en-US', optionsDate) + ', ' + date.toLocaleTimeString('en-US', optionsTime);
 }
+
 
 
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
