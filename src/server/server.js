@@ -24,8 +24,6 @@ function formatDate(dateString) {
   return date.toLocaleDateString('en-US', optionsDate) + ', ' + date.toLocaleTimeString('en-US', optionsTime);
 }
 
-
-
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.post('/heartData', async (req, res) => {
@@ -42,8 +40,10 @@ app.post('/heartData', async (req, res) => {
       if (apiKey !== "abcdefghijklmnop") {
         return res.status(401).json({ message: 'Invalid API key' });
       }
+
       // Find the user who has the matching device ID
       const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
+      
       if (userWithDevice) {
           // Append the new reading to the user's data
           userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date() });

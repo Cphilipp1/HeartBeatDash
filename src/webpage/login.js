@@ -1,4 +1,3 @@
-// Example using Fetch API to handle login
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('loginEmail').value;

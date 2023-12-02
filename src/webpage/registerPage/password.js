@@ -6,7 +6,6 @@ document.getElementById('passwordForm').addEventListener('submit', function(e) {
     const newPassword = document.getElementById('newPassword').value;
     const confirmNewPassword = document.getElementById('confirmNewPassword').value;
 
-    // Validate the new passwords match
     if (newPassword !== confirmNewPassword) {
         alert('New passwords do not match.');
         return;

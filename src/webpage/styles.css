@@ -1,17 +1,14 @@
-/* Reset some default browser styles */
 body, h1, h2, h3, h4, h5, h6, p, form, button {
     margin: 0;
     padding: 0;
 }
 
-/* Make a background color for the page */
 body {
     background-color: #fff; /* White background */
     font-family: Arial, sans-serif;
     color: #333; /* Dark text for contrast */
 }
 
-/* Center the container */
 #container {
     width: 90%;
     max-width: 40em;
@@ -20,10 +17,9 @@ body {
     padding: 1em;
     border-radius: 0.5em;
     box-shadow: 0 0.25em 0.375em rgba(0, 0, 0, 0.1);
-    transition: margin-left 0.3s; /* Added for sidebar toggle effect */
+    transition: margin-left 0.3s; 
 }
 
-/* Style the form fields and labels */
 label {
     display: block;
     font-weight: bold;
@@ -40,7 +36,6 @@ input[type="email"], input[type="password"], input[type="deviceId"], input[type=
     font-size: 1em;
 }
 
-/* Style the button */
 button {
     background-color: #D32F2F; /* Red background for buttons */
     color: white;
@@ -56,7 +51,6 @@ button:hover {
     background-color: #B71C1C; /* Darker red on hover */
 }
 
-/* Add some spacing and font styling */
 p, a {
     margin-top: 1.25em;
     font-size: 0.875em;
@@ -72,7 +66,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Styling for sections */
 #weeklySummary, #measurementSettings, #dailyView, #registeredDevices {
     background-color: #FFEBEE; /* Very light red for sections */
     padding: 1em;
@@ -97,7 +90,6 @@ h2 {
     font-weight: bold;
 }
 
-/* Sidebar Styling */
 #sidebar {
     position: fixed;
     left: -50%; /* Adjusted for correct initial position */
@@ -136,7 +128,6 @@ h2 {
     margin-left: 20%;
 }
 
-/* Toggle Sidebar Button */
 #toggleSidebar {
     position: fixed;
     left: 0;
@@ -149,7 +140,6 @@ h2 {
     z-index: 2; /* Ensure it's above other elements */
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     #sidebar {
         width: 100%;
