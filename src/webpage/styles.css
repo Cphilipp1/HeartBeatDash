@@ -20,6 +20,7 @@ body {
     padding: 1em;
     border-radius: 0.5em;
     box-shadow: 0 0.25em 0.375em rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.3s; /* Added for sidebar toggle effect */
 }
 
 /* Style the form fields and labels */
@@ -84,55 +85,57 @@ h2 {
 
 /* Sidebar Styling */
 #sidebar {
-    background: #E57373; /* Light red for the sidebar */
     position: fixed;
-    left: -50%; 
+    left: -20%; /* Adjusted for correct initial position */
     top: 0;
     width: 20%;
     height: 100%;
-    background: #333;
-    transition: left 0.3s;  
+    background: #D32F2F; /* Red sidebar */
     padding: 1em;
-    /* Other styles remain the same */
+    transition: left 0.3s; 
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 #sidebar ul li button {
-    color: white; /* White text for contrast */
     width: 100%;
     padding: 0.5em;
     cursor: pointer;
+    background-color: transparent;
+    color: white;
+    text-align: left;
 }
 
 /* Toggle Sidebar Button */
 #toggleSidebar {
-    background-color: #FFCDD2; /* Lighter red for the toggle button */
-    color: white; /* White text for contrast */
     position: fixed;
     left: 0;
     top: 0;
-    transition: left 0.3s;
+    background-color: #B71C1C; /* Darker red for toggle button */
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's above other elements */
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    #container {
-        width: 95%;
-        margin: 1em auto;
-        padding: 1em;
-    }
-
     #sidebar {
         width: 100%;
-        left: -100%;
+        left: -100%; /* Full width for mobile, initially hidden */
     }
 
     .sidebar-expanded #sidebar {
-        left: 0;
+        left: 0; /* Show sidebar on expand */
     }
 
     .sidebar-expanded #container {
-        margin-left: 0;
+        margin-left: 0; /* No margin shift for mobile */
     }
-
     #toggleSidebar {
         z-index: 2; /* Ensure button is above other elements */
     }
