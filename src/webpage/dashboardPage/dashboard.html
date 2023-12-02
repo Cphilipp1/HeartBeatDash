@@ -82,7 +82,7 @@
                         },
                         body: JSON.stringify({ userName: username })
                     });
-
+                    console.log("fetched Data:" + response.body)
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
