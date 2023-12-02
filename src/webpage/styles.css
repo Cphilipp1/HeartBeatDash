@@ -85,25 +85,33 @@ h2 {
 /* Sidebar Styling */
 #sidebar {
     background: #E57373; /* Light red for the sidebar */
+    position: fixed;
+    left: -50%; 
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background: #333;
+    transition: left 0.3s;  
+    padding: 1em;
     /* Other styles remain the same */
 }
 
 #sidebar ul li button {
     color: white; /* White text for contrast */
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
 }
 
 /* Toggle Sidebar Button */
 #toggleSidebar {
     background-color: #FFCDD2; /* Lighter red for the toggle button */
     color: white; /* White text for contrast */
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: left 0.3s;
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    /* Responsive styles remain the same */
-}
-
-
 /* Responsive Design */
 @media (max-width: 768px) {
     #container {
