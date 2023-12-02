@@ -141,7 +141,8 @@ app.get('/api/getDeviceData/:userName', async (req, res) => {
     }
 
     // Send the readings back
-    res.status(200).json({ readings: deviceData.readings });
+    // res.status(200).json({ readings: deviceData.readings });
+    res.status(200).json({ readings: formattedReadings });
   } catch (error) {
     console.error("Error in /api/getDeviceData endpoint:", error);
     res.status(500).json({ error: 'Internal Server Error' });
