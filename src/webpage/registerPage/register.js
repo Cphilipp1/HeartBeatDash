@@ -18,7 +18,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         return;
     }
 
-    fetch('http://localhost:3000/api/register', {
+    fetch('http://3.12.231.73:3000/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

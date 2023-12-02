@@ -16,7 +16,7 @@ document.getElementById('passwordForm').addEventListener('submit', function(e) {
         return;
     }
 
-    fetch('http://localhost:3000/updatePassword', {
+    fetch('http://3.12.231.73:3000/updatePassword', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
