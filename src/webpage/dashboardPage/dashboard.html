@@ -82,7 +82,7 @@
                 
                 try {
                     // Using template literals for dynamic URL
-                    const response = await fetch(`http://3.12.231:3000/api/getDeviceData/${username}`);
+                    const response = await fetch(`http://3.12.231.73/:3000/api/getDeviceData/${username}`);
                     
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
