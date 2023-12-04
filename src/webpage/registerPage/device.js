@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchRegisteredDevices(userName) {
-    fetch(`http://3.12.231.73:3000/getUserDevices/${userName}`)
+    fetch(`http://${ip}:3000/getUserDevices/${userName}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,7 +52,7 @@ function deleteDevice(deviceId) {
         return;
     }
 
-    fetch('http://3.12.231.73:3000/deleteDevice', {
+    fetch(`http://${ip}:3000/deleteDevice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         return;
     }
 
-    fetch('http://3.12.231.73:3000/addDevice', {
+    fetch(`http://${ip}:3000/addDevice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

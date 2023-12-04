@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Heart Track - Login</title>
+    <title>Heart to Heart - Login</title>
     
     <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
     <div id="container">
-        <h1>Login to Heart Track</h1>
+        <h1>Login to Heart to Heart</h1>
         <form id="loginForm">
             <label for="loginEmail">Email:</label>
             <input type="email" id="loginEmail" placeholder="Email" required>
@@ -17,10 +17,61 @@
             <label for="loginPassword">Password:</label>
             <input type="password" id="loginPassword" placeholder="Password" required>
             <br>
-            
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="./../registerPage/register.html">Register here</a></p>
+    </div>
+
+    <div id="teamSection" class="contentSection">
+        <button type="button" onclick="toggleTeamSection()">Meet the Team</button>
+        <div id="teamContent" style="display:none;">
+            <!-- Carter -->
+            <div class="teamMember">
+                <h3>Carter Philipp</h3>
+                <p>Email: cphilipp1@arizona.edu</p>
+                <!-- <img src="path_to_student1_photo.jpg" alt="Student 1 Photo"> -->
+            </div>
+
+            <!-- Darius -->
+            <div class="teamMember">
+                <h3>Darius </h3>
+                <p>Email: student2@example.com</p>
+                <!-- <img src="path_to_student2_photo.jpg" alt="Student 2 Photo"> -->
+            </div>
+
+            <!-- Eric -->
+            <div class="teamMember">
+                <h3>Eric </h3>
+                <p>Email: student3@example.com</p>
+                <!-- <img src="path_to_student3_photo.jpg" alt="Student 3 Photo"> -->
+            </div>
+
+        
+            <div class="projectExplanation">
+                <h3>Welcome to Heart to Heart - Your Personal Heart Health Companion</h3>
+                <p>
+                    At Heart to Heart, we believe in empowering you with the tools and knowledge to take charge of your heart health. Our innovative service seamlessly integrates cutting-edge IoT technology with a user-friendly web platform to provide real-time monitoring of your heart's well-being.
+                    
+                    What We Offer:
+                    
+                    Advanced Monitoring: Utilizing the latest in IoT technology, our Photon or Argon boards, coupled with the MAX30102 Pulse Detection Blood Oxygen Sensor, offer precise and continuous tracking of your heart rate and blood oxygen levels.
+                    
+                    Interactive Web Application: Our web platform is designed for ease of use. It features a responsive design that adapts to any device, ensuring you have access to your health data anytime, anywhere. Interactive charts and visualizations give you a clear view of your heart's health trends.
+                    
+                    Data at Your Fingertips: With Heart to Heart, your health data is securely stored and always accessible. Our robust database system ensures that your information is safe and available for you to review and share with healthcare professionals.
+                    
+                    Real-Time Alerts: Stay informed with immediate alerts for any irregularities in your heart rate or blood oxygen levels, allowing you to take timely action.
+                    
+                    Expert Support: Our team of experts is always ready to provide guidance and assistance, ensuring you get the most out of our service.
+                    
+                    Join Heart to Heart Today
+                    Embrace a proactive approach to heart health. With Heart to Heart, you're not just monitoring your health; you're taking a vital step towards a healthier, happier life. Join us in this journey towards heart wellness.
+                    </p>
+                    <p>
+                        Heart to Heart: Because Your Heart Matters.
+                    </p>
+            </div>
+        </div>
     </div>
     <script src="login.js"></script>    
 </body>

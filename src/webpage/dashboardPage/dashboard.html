@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Heart Track - Dashboard</title>
+    <title>Heart to Heart - Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -76,13 +76,13 @@
             console.log("username is :" + username)
             if (username) {
                 document.getElementById('usernameGreeting').textContent = `Welcome, ${username}`;
-                let apiPath = `http://3.12.231.73/:3000/api/getDeviceData/${username}`
+                let apiPath = `http://${ip}/:3000/api/getDeviceData/${username}`
 
                 console.log("about to fetch at: " + apiPath)
                 
                 try {
                     // Using template literals for dynamic URL
-                    const response = await fetch(`http://3.12.231.73:3000/api/getDeviceData/${username}`);
+                    const response = await fetch(`http://${ip}:3000/api/getDeviceData/${username}`);
                     
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);

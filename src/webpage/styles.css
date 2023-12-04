@@ -132,28 +132,64 @@ h2 {
     position: fixed;
     left: 0;
     top: 0;
-    background-color: #B71C1C; /* Darker red for toggle button */
+    background-color: #B71C1C; 
     color: white;
     border: none;
     padding: 0.5em 1em;
     cursor: pointer;
-    z-index: 2; /* Ensure it's above other elements */
+    z-index: 2; 
 }
 
 @media (max-width: 768px) {
     #sidebar {
         width: 100%;
-        left: -100%; /* Full width for mobile, initially hidden */
+        left: -100%;
     }
 
     .sidebar-expanded #sidebar {
-        left: 0; /* Show sidebar on expand */
+        left: 0; 
     }
 
     .sidebar-expanded #container {
-        margin-left: 0; /* No margin shift for mobile */
+        margin-left: 0; 
     }
     #toggleSidebar {
-        z-index: 2; /* Ensure button is above other elements */
+        z-index: 2; 
     }
+}
+
+
+/* Styles for Team Section */
+.contentSection {
+    background-color: #FFEBEE; /* Very light red, consistent with other sections */
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+.teamMember {
+    margin-bottom: 1em;
+}
+
+.teamMember h3 {
+    color: #D32F2F; /* Red for headings, consistent with other h2 elements */
+    margin-bottom: 0.5em;
+}
+
+.teamMember p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333; /* Dark text for contrast, consistent with body color */
+}
+
+.projectExplanation h3 {
+    color: #D32F2F; /* Red for headings */
+    margin-bottom: 0.5em;
+}
+
+.projectExplanation p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333; /* Dark text for contrast */
 }
