@@ -1,4 +1,4 @@
-let ip;
+var ip;
 
 function loadConstants() {
     return fetch('./constants.json')
