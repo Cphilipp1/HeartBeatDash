@@ -4,7 +4,7 @@ function loadConstants() {
     return fetch('./constants.json')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data.IP)
             return data;
         })
         .catch(error => console.error("Error loading constants:", error));
@@ -12,6 +12,7 @@ function loadConstants() {
 
 document.addEventListener("DOMContentLoaded", function(e){
     loadConstants().then(constants => {
+        console.log(constants)
         ip = constants.IP;
     });
 
