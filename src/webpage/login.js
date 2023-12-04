@@ -13,7 +13,9 @@ function loadConstants() {
 document.addEventListener("DOMContentLoaded", function(e){
     loadConstants().then(constants => {
         console.log(constants)
+        console.log(constants.IP)
         ip = constants.IP;
+        console.log("ip is now: " + ip)
     });
 
     console.log("Got IP: " + ip);
