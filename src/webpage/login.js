@@ -1,5 +1,3 @@
-var ip;
-
 function loadConstants() {
     return fetch('./constants.json')
         .then(response => response.json())
@@ -11,14 +9,11 @@ function loadConstants() {
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
-    loadConstants().then(constants => {
-        console.log(constants)
-        console.log(constants.IP)
-        ip = constants.IP;
-        console.log("ip is now: " + ip)
+    loadConstants().then(constants => {        
+        window.ip = constants.IP;
     });
 
-    console.log("Got IP: " + ip);
+    console.log("Got IP: " + window.ip);
 })
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -28,7 +23,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const password = document.getElementById('loginPassword').value;
 
     console.log("got IP:" + ip)
-    fetch(`http://${ip}:3000/api/login`, {
+    fetch(`http://${window.ip}:3000/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,11 +41,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
             console.log(data)
         }
     });
-
 });
-
-
-
 
 function toggleTeamSection() {
     var x = document.getElementById("teamContent");
