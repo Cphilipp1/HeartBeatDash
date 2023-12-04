@@ -1,9 +1,13 @@
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    let ip;
-    console.log("getting here")
+let ip;
+
+document.addEventListener("DOMContentLoaded", function(e){
     loadConstants().then(constants => {
         ip = constants.IP;
     });
+})
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    console.log("getting here")
     e.preventDefault();
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
