@@ -1,7 +1,7 @@
 let ip;
 
 function loadConstants() {
-    return fetch('path/to/constants.json')
+    return fetch('./constants.json')
         .then(response => response.json())
         .then(data => {
             return data;
