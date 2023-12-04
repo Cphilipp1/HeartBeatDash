@@ -19,7 +19,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
-    fetch(`http://${localStorage.getItem("ip")}}:3000/api/login`, {
+    fetch(`http://${localStorage.getItem("ip")}:3000/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
