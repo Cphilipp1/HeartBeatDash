@@ -33,8 +33,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         if (data.token) {
             console.log(data);
             localStorage.setItem('username', email);
-            // localStorage.setItem('token', data.token);
-            window.location.href = "../dashboardPage/dashboard.html";
+            console.log(localStorage)
+            // window.location.href = "../dashboardPage/dashboard.html";
         } else {
             console.log(data)
         }
