@@ -1,9 +1,5 @@
 document.getElementById('registerForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    let ip;
-    loadConstants().then(constants => {
-        ip = constants.IP;
-    });
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
     const deviceId = document.getElementById('deviceId').value;
@@ -21,7 +17,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         return;
     }
 
-    fetch(`http://${ip}:3000/api/register`, {
+    fetch(`http://${localStorage.getItem("ip")}:3000/api/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

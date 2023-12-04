@@ -8,11 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchRegisteredDevices(userName) {
-    let ip;
-    loadConstants().then(constants => {
-        ip = constants.IP;
-    });
-    fetch(`http://${ip}:3000/getUserDevices/${userName}`)
+    fetch(`http://${localStorage.getItem("ip")}:3000/getUserDevices/${userName}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -55,12 +51,8 @@ function deleteDevice(deviceId) {
         alert('No user logged in');
         return;
     }
-    let ip;
-    loadConstants().then(constants => {
-        ip = constants.IP;
-    });
 
-    fetch(`http://${ip}:3000/deleteDevice`, {
+    fetch(`http://${localStorage.getItem("ip")}:3000/deleteDevice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -95,13 +87,8 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         alert('Device ID is required');
         return;
     }
-
-    let ip;
-    loadConstants().then(constants => {
-        ip = constants.IP;
-    });
-
-    fetch(`http://${ip}:3000/addDevice`, {
+    
+    fetch(`http://${localStorage.getItem("ip")}:3000/addDevice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

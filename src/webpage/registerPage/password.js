@@ -1,9 +1,5 @@
 document.getElementById('passwordForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    let ip;
-    loadConstants().then(constants => {
-        ip = constants.IP;
-    });
     const userName = localStorage.getItem('username');
     const currentPassword = document.getElementById('currentPassword').value;
     const newPassword = document.getElementById('newPassword').value;
@@ -18,7 +14,7 @@ document.getElementById('passwordForm').addEventListener('submit', function(e) {
         return;
     }
 
-    fetch(`http://${ip}:3000/updatePassword`, {
+    fetch(`http://${localStorage.getItem("ip")}:3000/updatePassword`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

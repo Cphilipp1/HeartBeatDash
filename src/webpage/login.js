@@ -9,11 +9,9 @@ function loadConstants() {
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
-    loadConstants().then(constants => {        
-        window.ip = constants.IP;
+    loadConstants().then(constants => {       
+        localStorage.setItem("ip", constants.IP);
     });
-
-    console.log("Got IP: " + window.ip);
 })
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -23,7 +21,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const password = document.getElementById('loginPassword').value;
 
     console.log("got IP:" + ip)
-    fetch(`http://${window.ip}:3000/api/login`, {
+    fetch(`http://${localStorage.getItem("ip")}}:3000/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
