@@ -1,9 +1,20 @@
 let ip;
 
+function loadConstants() {
+    return fetch('path/to/constants.json')
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        })
+        .catch(error => console.error("Error loading constants:", error));
+}
+
 document.addEventListener("DOMContentLoaded", function(e){
     loadConstants().then(constants => {
         ip = constants.IP;
     });
+
+    console.log("Got IP: " + ip);
 })
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
