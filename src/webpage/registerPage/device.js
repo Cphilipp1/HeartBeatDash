@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchRegisteredDevices(userName) {
+    let ip;
+    loadConstants().then(constants => {
+        ip = constants.IP;
+    });
     fetch(`http://${ip}:3000/getUserDevices/${userName}`)
     .then(response => {
         if (!response.ok) {
@@ -51,6 +55,10 @@ function deleteDevice(deviceId) {
         alert('No user logged in');
         return;
     }
+    let ip;
+    loadConstants().then(constants => {
+        ip = constants.IP;
+    });
 
     fetch(`http://${ip}:3000/deleteDevice`, {
         method: 'POST',
@@ -87,6 +95,11 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         alert('Device ID is required');
         return;
     }
+
+    let ip;
+    loadConstants().then(constants => {
+        ip = constants.IP;
+    });
 
     fetch(`http://${ip}:3000/addDevice`, {
         method: 'POST',
