@@ -72,6 +72,7 @@
 
         window.addEventListener('DOMContentLoaded', async (event) => {
             console.log("Before username")
+            console.log(localStorage)
             const username = localStorage.getItem('username');
             console.log("username is :" + username)
             if (username) {
