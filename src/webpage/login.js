@@ -31,8 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         if (data.token) {
             console.log(data);
             localStorage.setItem('username', email);
-            console.log(localStorage)
-            // window.location.href = "../dashboardPage/dashboard.html";
+            window.location.href = "../dashboardPage/dashboard.html";
         } else {
             console.log(data)
         }
