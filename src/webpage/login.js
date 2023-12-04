@@ -1,17 +1,10 @@
-function loadConstants() {
-    return fetch('./constants.json')
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        })
-        .catch(error => console.error("Error loading constants:", error));
-}
-
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     loadConstants().then(constants => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
+
+        console.log("got IP:" + constants.IP)
         fetch(`http://${constants.IP}:3000/api/login`, {
             method: 'POST',
             headers: {
