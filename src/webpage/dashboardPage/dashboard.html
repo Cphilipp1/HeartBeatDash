@@ -144,18 +144,22 @@
             if (heartRateChart) heartRateChart.destroy();
             if (bloodOxygenChart) bloodOxygenChart.destroy();
 
-            const dateInput = document.getElementById('date').value;
+            const dateInputElement = document.getElementById('date');
             const startTimeInput = document.getElementById('startTime').value;
             const endTimeInput = document.getElementById('endTime').value;
             const frequency = parseInt(document.getElementById('frequency').value) || 1;
 
             let filteredReadings = allReadings.filter(reading => {
                 const readingDate = new Date(reading.timestamp);
-                console.log(readingDate)
                 const readingDateString = readingDate.toISOString().split('T')[0];
-                console.log(readingDateString)
 
-                console.log(dateInput)
+                // Convert the date input to the same format as readingDateString
+                let dateInput = null;
+                if (dateInputElement.value) {
+                    const selectedDate = new Date(dateInputElement.value);
+                    dateInput = selectedDate.toISOString().split('T')[0];
+                }
+
                 // Filter by date first
                 if (dateInput && readingDateString !== dateInput) {
                     return false;
@@ -176,6 +180,7 @@
 
             updateCharts(filteredReadings);
         }
+
 
 
         document.getElementById('logoutButton').addEventListener('click', function() {
