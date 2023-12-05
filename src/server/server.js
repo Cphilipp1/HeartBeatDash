@@ -135,14 +135,12 @@ app.post('/api/register', async (req, res) => {
       console.log('Device Data to be inserted:', newDeviceData);
       const deviceDataMessage = await newDeviceData.save();
       console.log('Device Data inserted with message:', deviceDataMessage);
-
       res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
       console.error('Failed to insert user:', err);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
   try {

@@ -28,7 +28,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(data => {
         if (data.message) {
-            window.location.href = "../dashboardPage/dashboard.html";
+            window.location.href = "../index.html";
         } else {
             alert('Registration failed: ' + data.error);
         }
