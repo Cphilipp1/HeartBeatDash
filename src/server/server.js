@@ -113,7 +113,7 @@ app.post('/api/login', async (req, res) => {
   res.status(200).json({ token });
 });
 
-app.post('/api/register', verifyToken, async (req, res) => {
+app.post('/api/register', async (req, res) => {
   console.log("Debug: Inside POST /api/register");
 
   const { email, password, deviceId } = req.body;
