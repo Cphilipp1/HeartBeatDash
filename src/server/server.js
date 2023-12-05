@@ -51,7 +51,7 @@ function formatDate(dateString) {
 
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
 
-app.post('/heartData', verifyToken, async (req, res) => {
+app.post('/heartData', async (req, res) => {
   try {
       console.log("Debug: Inside POST /heartData");
       const parsedData = JSON.parse(req.body.data);
