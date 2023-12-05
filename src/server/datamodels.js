@@ -11,7 +11,6 @@ const readingSchema = new mongoose.Schema({
     },
     timestamp: {
       type: Date,
-      default: Date.now
     }
   });
 
