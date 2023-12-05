@@ -92,8 +92,8 @@
                     console.log(data);
 
                     updateCharts(data.readings);
-                    allReadings = data.readings; // Store fetched readings
-                    updateCharts(allReadings); // Initial chart update
+                    allReadings = data.readings; 
+                    updateCharts(allReadings); 
                 } catch (error) {
                     console.error('Error fetching device data:', error);
                 }
