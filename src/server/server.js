@@ -43,7 +43,9 @@ function verifyToken(req, res, next) {
 }
 
 function formatDate(dateString) {
+  console.log(dateString)
   const date = new Date(dateString);
+  console.log(date)
   const optionsDate = { year: 'numeric', month: 'short', day: 'numeric' };
   const optionsTime = { hour: '2-digit', minute: '2-digit', hour12: true };
   return date.toLocaleDateString('en-US', optionsDate) + ', ' + date.toLocaleTimeString('en-US', optionsTime);
@@ -157,12 +159,13 @@ app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
 
     // Use the deviceId to get the device data
     const deviceData = await DeviceData.findOne({ deviceId: loginData.deviceId });
+
+    console.log(deviceData)
+
     const formattedReadings = deviceData.readings.map(reading => ({
       ...reading._doc,
       timestamp: formatDate(reading.timestamp)
     }));
-
-    console.log(formattedReadings);
     if (!deviceData) {
       return res.status(404).json({ error: 'Device data not found' });
     }
