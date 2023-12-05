@@ -62,6 +62,38 @@
     </div>
 
     <script>
+        function updateSummaryStatistics(readings) {
+            // Calculate the date of the most recent Sunday
+            const today = new Date();
+            const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
+
+            // Filter readings since the most recent Sunday
+            const filteredReadings = readings.filter(reading => {
+                const readingDate = new Date(reading.timestamp);
+                return readingDate >= lastSunday;
+            });
+
+            // Compute summary statistics
+            const heartRateData = filteredReadings.map(reading => reading.heartRate);
+            const bloodOxygenData = filteredReadings.map(reading => reading.bloodOxygen);
+
+            const avgHeartRate = calculateAverage(heartRateData);
+            const minHeartRate = Math.min(...heartRateData);
+            const maxHeartRate = Math.max(...heartRateData);
+
+            const avgBloodOxygen = calculateAverage(bloodOxygenData);
+            const minBloodOxygen = Math.min(...bloodOxygenData);
+            const maxBloodOxygen = Math.max(...bloodOxygenData);
+
+            document.getElementById('avgHeartRate').textContent = avgHeartRate.toFixed(2);
+            document.getElementById('minHeartRate').textContent = minHeartRate;
+            document.getElementById('maxHeartRate').textContent = maxHeartRate;
+
+            document.getElementById('avgBloodOxygen').textContent = avgBloodOxygen.toFixed(2);
+            document.getElementById('minBloodOxygen').textContent = minBloodOxygen;
+            document.getElementById('maxBloodOxygen').textContent = maxBloodOxygen;
+        }
+
         let heartRateChart;
         let bloodOxygenChart;
         let allReadings = [];
@@ -108,6 +140,7 @@
                     console.error('Error fetching device data:', error);
                 }
             }
+            updateSummaryStatistics(allReadings);
         });
 
         document.getElementById('settingsForm').addEventListener('submit', function(event) {
@@ -198,22 +231,6 @@
             const heartRateData = readings.map(reading => reading.heartRate);
             const bloodOxygenData = readings.map(reading => reading.bloodOxygen);
 
-            const avgHeartRate = calculateAverage(heartRateData);
-            const minHeartRate = Math.min(...heartRateData);
-            const maxHeartRate = Math.max(...heartRateData);
-
-            const avgBloodOxygen = calculateAverage(bloodOxygenData);
-            const minBloodOxygen = Math.min(...bloodOxygenData);
-            const maxBloodOxygen = Math.max(...bloodOxygenData);
-
-            document.getElementById('avgHeartRate').textContent = avgHeartRate.toFixed(2);
-            document.getElementById('minHeartRate').textContent = minHeartRate;
-            document.getElementById('maxHeartRate').textContent = maxHeartRate;
-
-            document.getElementById('avgBloodOxygen').textContent = avgBloodOxygen.toFixed(2);
-            document.getElementById('minBloodOxygen').textContent = minBloodOxygen;
-            document.getElementById('maxBloodOxygen').textContent = maxBloodOxygen;
-
             const ctx1 = document.getElementById('heartRateChart').getContext('2d');
             heartRateChart = new Chart(ctx1, {
                 type: 'line',
@@ -243,7 +260,8 @@
                     }]
                 }
             });
-        }        
+        }
+     
     </script>
 </body>
 </html>
