@@ -54,8 +54,9 @@ mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: 
 app.post('/heartData', async (req, res) => {
   try {
       console.log("Debug: Inside POST /heartData");
-      const parsedData = JSON.parse(req.body.data);
-
+      const parsedData = JSON.parse(req.body.data); 
+      console.log(req.body.data)
+      console.log(req.body)
       // Extract values and assign them to variables
       const deviceId = parsedData.deviceId;
       const heartRate = parsedData.heartRate;
