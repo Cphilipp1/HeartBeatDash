@@ -79,7 +79,7 @@ app.post('/heartData', verifyToken, async (req, res) => {
   }
 });
 
-app.post('/api/login', verifyToken, async (req, res) => {
+app.post('/api/login', async (req, res) => {
   console.log("Debug: Inside POST /api/login");
   console.log(req.body);
 
