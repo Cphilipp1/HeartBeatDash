@@ -66,10 +66,15 @@
             // Calculate the date of the most recent Sunday
             const today = new Date();
             const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
-
+        
             // Filter readings since the most recent Sunday
             const filteredReadings = readings.filter(reading => {
                 const readingDate = new Date(reading.timestamp);
+
+
+                console.log(readingDate)
+                console.log(lastSunday)
+
                 return readingDate >= lastSunday;
             });
 
