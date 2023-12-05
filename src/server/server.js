@@ -75,7 +75,7 @@ app.post('/heartData', async (req, res) => {
       
       if (userWithDevice) {
           // Append the new reading to the user's data
-          userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: req.body.timestamp});
+          userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date(parsedData.timestamp)});
           await userWithDevice.save();
           console.log("data saved");
           res.status(200).json({ message: 'Data updated successfully!' });
