@@ -145,26 +145,18 @@
             if (bloodOxygenChart) bloodOxygenChart.destroy();
 
             const dateInputElement = document.getElementById('date');
+            const dateInput = dateInputElement.value; // Directly use the input value
             const startTimeInput = document.getElementById('startTime').value;
             const endTimeInput = document.getElementById('endTime').value;
             const frequency = parseInt(document.getElementById('frequency').value) || 1;
 
             let filteredReadings = allReadings.filter(reading => {
                 const readingDate = new Date(reading.timestamp);
-                
-                // Adjust the date to local time zone before converting to ISO string
-                const offset = readingDate.getTimezoneOffset() * 60000; // offset in milliseconds
-                const localISODate = new Date(readingDate.getTime() - offset).toISOString().split('T')[0];
+                // Format reading date to local date string (YYYY-MM-DD)
+                const localISODate = readingDate.getFullYear() + '-' + 
+                                    ('0' + (readingDate.getMonth() + 1)).slice(-2) + '-' + 
+                                    ('0' + readingDate.getDate()).slice(-2);
 
-                // Convert the date input to the same format as localISODate
-                let dateInput = null;
-                if (dateInputElement.value) {
-                    const selectedDate = new Date(dateInputElement.value);
-                    const selectedDateOffset = selectedDate.getTimezoneOffset() * 60000;
-                    dateInput = new Date(selectedDate.getTime() - selectedDateOffset).toISOString().split('T')[0];
-                }
-                console.log(localISODate)
-                console.log(dateInput)
                 // Filter by date first
                 if (dateInput && localISODate !== dateInput) {
                     return false;
