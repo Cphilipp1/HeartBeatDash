@@ -151,21 +151,21 @@
 
             let filteredReadings = allReadings.filter(reading => {
                 const readingDate = new Date(reading.timestamp);
+                
+                // Adjust the date to local time zone before converting to ISO string
+                const offset = readingDate.getTimezoneOffset() * 60000; // offset in milliseconds
+                const localISODate = new Date(readingDate.getTime() - offset).toISOString().split('T')[0];
 
-                console.log(readingDate)
-                const readingDateString = readingDate.toISOString().split('T')[0];
-
-                // Convert the date input to the same format as readingDateString
+                // Convert the date input to the same format as localISODate
                 let dateInput = null;
                 if (dateInputElement.value) {
                     const selectedDate = new Date(dateInputElement.value);
-                    dateInput = selectedDate.toISOString().split('T')[0];
+                    const selectedDateOffset = selectedDate.getTimezoneOffset() * 60000;
+                    dateInput = new Date(selectedDate.getTime() - selectedDateOffset).toISOString().split('T')[0];
                 }
-                console.log(dateInput)
-                console.log(readingDateString)
-                console.log(dateInput)
+
                 // Filter by date first
-                if (dateInput && readingDateString !== dateInput) {
+                if (dateInput && localISODate !== dateInput) {
                     return false;
                 }
 
@@ -184,6 +184,7 @@
 
             updateCharts(filteredReadings);
         }
+
 
 
 
