@@ -11,6 +11,7 @@ function loadConstants() {
 document.addEventListener("DOMContentLoaded", function(e){
     loadConstants().then(constants => {       
         localStorage.setItem("ip", constants.IP);
+        console.log(`http://${localStorage.getItem("ip")}:3000/api/login`)
     });
 })
 
@@ -33,6 +34,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
             localStorage.setItem('username', email);
             window.location.href = "../dashboardPage/dashboard.html";
         } else {
+            console.log(data)
             loginErrorDiv.style.display = 'block'; // Show error message if login fails
             console.log(data);
         }
