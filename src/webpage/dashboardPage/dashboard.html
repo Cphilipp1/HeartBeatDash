@@ -163,7 +163,8 @@
                     const selectedDateOffset = selectedDate.getTimezoneOffset() * 60000;
                     dateInput = new Date(selectedDate.getTime() - selectedDateOffset).toISOString().split('T')[0];
                 }
-
+                console.log(localISODate)
+                console.log(dateInput)
                 // Filter by date first
                 if (dateInput && localISODate !== dateInput) {
                     return false;
