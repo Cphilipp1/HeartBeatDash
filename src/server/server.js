@@ -20,8 +20,14 @@ app.use(cors({
 const jwtSecretKey = 'abcdefghijklmnop';
 
 function verifyToken(req, res, next) {
-  const token = req.headers['x-access-token'] || req.headers['authorization'];
+  let token = req.headers['x-access-token'] || req.headers['authorization']; // Extract the token from header
   
+  // Check if token exists and has the Bearer prefix
+  if (token && token.startsWith('Bearer ')) {
+    // Remove Bearer from string
+    token = token.slice(7, token.length);
+  }
+
   if (!token) {
     return res.status(403).json({ error: 'A token is required for authentication' });
   }
@@ -30,12 +36,11 @@ function verifyToken(req, res, next) {
     const decoded = jwt.verify(token, jwtSecretKey);
     req.user = decoded;
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.status(401).json({ error: 'Invalid Token' });
   }
   return next();
 }
-
 
 function formatDate(dateString) {
   const date = new Date(dateString);
