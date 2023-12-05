@@ -22,6 +22,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const password = document.getElementById('loginPassword').value;
     const loginErrorDiv = document.getElementById('loginError'); 
 
+    console.log(loginErrorDiv)
+
     fetch(`http://${localStorage.getItem("ip")}:3000/api/login`, {
         method: 'POST',
         headers: {
