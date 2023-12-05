@@ -27,7 +27,7 @@ label {
     color: #D32F2F; /* Dark red for labels */
 }
 
-input[type="email"], input[type="password"], input[type="deviceId"], input[type="time"], input[type="number"] {
+input[type="email"], input[type="password"], input[type="deviceId"], input[type="time"], input[type="number"], input[type="date"] {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;

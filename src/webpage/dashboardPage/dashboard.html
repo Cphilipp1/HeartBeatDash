@@ -34,12 +34,22 @@
         <section id="measurementSettings">
             <h2>Measurement Settings</h2>
             <form id="settingsForm">
+                <label for="date">Date:</label>
+                <input type="date" id="date">
+                <br>
+
                 <label for="startTime">Start Time:</label>
                 <input type="time" id="startTime">
+                <br>
+
                 <label for="endTime">End Time:</label>
                 <input type="time" id="endTime">
+                <br>
+
                 <label for="frequency">Frequency:</label>
                 <input type="number" id="frequency" placeholder="Hours">
+                <br>
+
                 <button type="submit">Save Settings</button>
             </form>
         </section>
@@ -105,21 +115,56 @@
             filterAndUpdateCharts();
         });
 
+        // function filterAndUpdateCharts() {
+        //     if (heartRateChart) heartRateChart.destroy();
+        //     if (bloodOxygenChart) bloodOxygenChart.destroy();
+        //     const startTimeInput = document.getElementById('startTime').value;
+        //     const endTimeInput = document.getElementById('endTime').value;
+        //     const frequency = parseInt(document.getElementById('frequency').value) || 1;
+
+        //     let filteredReadings = allReadings.filter(reading => {
+        //         const readingDate = new Date(reading.timestamp);
+        //         const readingHour = readingDate.getHours();
+        //         const readingMinutes = readingDate.getMinutes();
+
+        //         const [startHour, startMinutes] = startTimeInput ? startTimeInput.split(':').map(Number) : [0, 0];
+        //         const [endHour, endMinutes] = endTimeInput ? endTimeInput.split(':').map(Number) : [23, 59];
+
+        //         return (readingHour > startHour || (readingHour === startHour && readingMinutes >= startMinutes)) &&
+        //             (readingHour < endHour || (readingHour === endHour && readingMinutes <= endMinutes));
+        //     });
+
+        //     filteredReadings = filteredReadings.filter((_, index) => index % frequency === 0);
+
+        //     updateCharts(filteredReadings);
+        // }
+
+
         function filterAndUpdateCharts() {
             if (heartRateChart) heartRateChart.destroy();
             if (bloodOxygenChart) bloodOxygenChart.destroy();
+
+            const dateInput = document.getElementById('date').value;
             const startTimeInput = document.getElementById('startTime').value;
             const endTimeInput = document.getElementById('endTime').value;
             const frequency = parseInt(document.getElementById('frequency').value) || 1;
 
             let filteredReadings = allReadings.filter(reading => {
                 const readingDate = new Date(reading.timestamp);
+                const readingDateString = readingDate.toISOString().split('T')[0];
+
+                // Filter by date first
+                if (dateInput && readingDateString !== dateInput) {
+                    return false;
+                }
+
                 const readingHour = readingDate.getHours();
                 const readingMinutes = readingDate.getMinutes();
 
                 const [startHour, startMinutes] = startTimeInput ? startTimeInput.split(':').map(Number) : [0, 0];
                 const [endHour, endMinutes] = endTimeInput ? endTimeInput.split(':').map(Number) : [23, 59];
 
+                // Then filter by time
                 return (readingHour > startHour || (readingHour === startHour && readingMinutes >= startMinutes)) &&
                     (readingHour < endHour || (readingHour === endHour && readingMinutes <= endMinutes));
             });
@@ -128,6 +173,7 @@
 
             updateCharts(filteredReadings);
         }
+
 
         document.getElementById('logoutButton').addEventListener('click', function() {
             localStorage.clear();
