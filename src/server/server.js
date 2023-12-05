@@ -56,9 +56,6 @@ app.post('/heartData', async (req, res) => {
       console.log("Debug: Inside POST /heartData");
       console.log(req.body.data)
       console.log(req.body)
-      console.log(req)
-
-
       const parsedData = JSON.parse(req.body.data); 
       // Extract values and assign them to variables
       const deviceId = parsedData.deviceId;

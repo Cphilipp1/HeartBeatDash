@@ -8,13 +8,13 @@ async function sendDummyData() {
       let timestamp = new Date(startDate.getTime() + i * interval * 60000);
 
       // Create dummy data
-      let data = {
+      let data = {"data" : {
           deviceId: "e00fce6869b0c02b15eef17b",
           heartRate: Math.floor(Math.random() * 40) + 60, // Random heart rate between 60 and 100
           bloodOxygen: Math.floor(Math.random() * 10) + 90, // Random SpO2 between 90 and 100
           timestamp: timestamp.toISOString(),
           apiKey: "abcdefghijklmnop"
-      };
+      }}
 
       // Send data to the server
       try {
