@@ -151,8 +151,9 @@
 
             let filteredReadings = allReadings.filter(reading => {
                 const readingDate = new Date(reading.timestamp);
+                console.log(readingDate)
                 const readingDateString = readingDate.toISOString().split('T')[0];
-
+                console.log(readingDateString)
                 // Filter by date first
                 if (dateInput && readingDateString !== dateInput) {
                     return false;
