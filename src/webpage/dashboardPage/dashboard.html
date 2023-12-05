@@ -154,6 +154,8 @@
                 console.log(readingDate)
                 const readingDateString = readingDate.toISOString().split('T')[0];
                 console.log(readingDateString)
+
+                console.log(dateInput)
                 // Filter by date first
                 if (dateInput && readingDateString !== dateInput) {
                     return false;
