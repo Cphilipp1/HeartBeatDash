@@ -20,6 +20,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
+    const loginErrorDiv = document.getElementById('loginError'); 
+
     fetch(`http://${localStorage.getItem("ip")}:3000/api/login`, {
         method: 'POST',
         headers: {
@@ -30,11 +32,9 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     .then(response => response.json())
     .then(data => {
         if (data.token) {
-            console.log(data);
             localStorage.setItem('username', email);
             window.location.href = "../dashboardPage/dashboard.html";
         } else {
-            console.log(data)
             loginErrorDiv.style.display = 'block'; // Show error message if login fails
             console.log(data);
         }
