@@ -161,6 +161,8 @@ app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
       ...reading._doc,
       timestamp: formatDate(reading.timestamp)
     }));
+
+    console.log(formattedReadings);
     if (!deviceData) {
       return res.status(404).json({ error: 'Device data not found' });
     }
