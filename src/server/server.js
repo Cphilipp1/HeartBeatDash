@@ -17,6 +17,25 @@ app.use(cors({
   origin: '*'
 }));
 
+const jwtSecretKey = 'abcdefghijklmnop';
+
+function verifyToken(req, res, next) {
+  const token = req.headers['x-access-token'] || req.headers['authorization'];
+  
+  if (!token) {
+    return res.status(403).json({ error: 'A token is required for authentication' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, jwtSecretKey);
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid Token' });
+  }
+  return next();
+}
+
+
 function formatDate(dateString) {
   const date = new Date(dateString);
   const optionsDate = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -26,7 +45,7 @@ function formatDate(dateString) {
 
 mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
 
-app.post('/heartData', async (req, res) => {
+app.post('/heartData', verifyToken, async (req, res) => {
   try {
       console.log("Debug: Inside POST /heartData");
       const parsedData = JSON.parse(req.body.data);
@@ -60,7 +79,7 @@ app.post('/heartData', async (req, res) => {
   }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', verifyToken, async (req, res) => {
   console.log("Debug: Inside POST /api/login");
   console.log(req.body);
 
@@ -88,7 +107,7 @@ app.post('/api/login', async (req, res) => {
   res.status(200).json({ token });
 });
 
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', verifyToken, async (req, res) => {
   console.log("Debug: Inside POST /api/register");
 
   const { email, password, deviceId } = req.body;
@@ -119,10 +138,8 @@ app.post('/api/register', async (req, res) => {
 });
 
 
-app.get('/api/getDeviceData/:userName', async (req, res) => {
-  console.log("INSIDE GETDEVICEDATA");
+app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
   try {
-    console.log("INSIDE GETDEVICEDATA");
     const userName = req.params.userName;
 
     // Find the user's login data to get the deviceId
@@ -151,7 +168,7 @@ app.get('/api/getDeviceData/:userName', async (req, res) => {
   }
 });
 
-app.post('/addDevice', async (req, res) => {
+app.post('/addDevice', verifyToken, async (req, res) => {
   try {
       const { userName, newDeviceId } = req.body;
 
@@ -182,7 +199,7 @@ app.post('/addDevice', async (req, res) => {
   }
 });
 
-app.get('/getUserDevices/:userName', async (req, res) => {
+app.get('/getUserDevices/:userName', verifyToken, async (req, res) => {
   try {
       const userName = req.params.userName;
 
@@ -202,7 +219,7 @@ app.get('/getUserDevices/:userName', async (req, res) => {
   }
 });
 
-app.post('/deleteDevice', async (req, res) => {
+app.post('/deleteDevice', verifyToken, async (req, res) => {
   try {
       const { userName, deviceId } = req.body;
 
@@ -233,7 +250,7 @@ app.post('/deleteDevice', async (req, res) => {
   }
 });
 
-app.post('/updatePassword', async (req, res) => {
+app.post('/updatePassword', verifyToken, async (req, res) => {
   try {
       const { userName, currentPassword, newPassword } = req.body;
       console.log("INSIDE UPDATE PASSWORD")

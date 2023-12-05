@@ -23,10 +23,12 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const loginErrorDiv = document.getElementById('loginError'); 
 
     console.log(loginErrorDiv)
+    const token = localStorage.getItem('token');
 
     fetch(`http://${localStorage.getItem("ip")}:3000/api/login`, {
         method: 'POST',
         headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password })
@@ -35,6 +37,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     .then(data => {
         if (data.token) {
             localStorage.setItem('username', email);
+            localStorage.setItem('token', data.token);
             window.location.href = "../dashboardPage/dashboard.html";
         } else {
             loginErrorDiv.style.display = 'block'; // Show error message if login fails

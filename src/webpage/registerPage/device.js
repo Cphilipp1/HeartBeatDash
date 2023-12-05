@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchRegisteredDevices(userName) {
-    fetch(`http://${localStorage.getItem("ip")}:3000/getUserDevices/${userName}`)
+    const token = localStorage.getItem('token');
+    fetch(`http://${localStorage.getItem("ip")}:3000/getUserDevices/${userName}`,
+    {  headers: {
+        'Authorization': `Bearer ${token}`
+      }})
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -51,11 +55,13 @@ function deleteDevice(deviceId) {
         alert('No user logged in');
         return;
     }
+    const token = localStorage.getItem('token');
 
     fetch(`http://${localStorage.getItem("ip")}:3000/deleteDevice`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ userName, deviceId })
     })
@@ -87,11 +93,13 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         alert('Device ID is required');
         return;
     }
-    
+    const token = localStorage.getItem('token');
+
     fetch(`http://${localStorage.getItem("ip")}:3000/addDevice`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ userName, newDeviceId: deviceId })
     })

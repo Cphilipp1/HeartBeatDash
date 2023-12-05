@@ -13,11 +13,12 @@ document.getElementById('passwordForm').addEventListener('submit', function(e) {
         alert('Your password is not strong enough. It must contain at least one uppercase letter, one lowercase letter, one special character, and be at least 8 characters long.');
         return;
     }
-
+    const token = localStorage.getItem('token');
     fetch(`http://${localStorage.getItem("ip")}:3000/updatePassword`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ userName, currentPassword, newPassword })
     })
