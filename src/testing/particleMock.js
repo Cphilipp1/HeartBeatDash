@@ -9,7 +9,7 @@ async function sendDummyData() {
 
       // Create dummy data
       let data = {"data" : {
-          deviceId: "e00fce6869b0c02b15eef17b",
+          deviceId: "e00fce6arstd0c02b15eef17b",
           heartRate: Math.floor(Math.random() * 40) + 60, // Random heart rate between 60 and 100
           bloodOxygen: Math.floor(Math.random() * 10) + 90, // Random SpO2 between 90 and 100
           timestamp: timestamp.toISOString(),
@@ -18,7 +18,7 @@ async function sendDummyData() {
 
       // Send data to the server
       try {
-          const response = await fetch('http://3.144.132.169:3000/heartData', {
+          const response = await fetch('http://3.144.130.240:3000/heartData', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
