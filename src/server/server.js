@@ -140,6 +140,9 @@ app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
       timestamp: formatDate(reading.timestamp)
     }));
 
+    console.log(deviceData)
+    console.log(formattedReadings)
+
     res.status(200).json({ readings: formattedReadings });
     console.log(`Device data retrieved for user: ${userName}`);
   } catch (error) {
