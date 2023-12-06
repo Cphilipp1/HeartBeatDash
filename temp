@@ -1,0 +1,578 @@
+[
+      {
+        heartRate: 96,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-02T09:00:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d1f4")
+      },
+      {
+        heartRate: 81,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T09:30:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d1f8")
+      },
+      {
+        heartRate: 85,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-02T10:00:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d1fd")
+      },
+      {
+        heartRate: 71,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-02T10:30:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d203")
+      },
+      {
+        heartRate: 81,
+        bloodOxygen: 94,
+        timestamp: ISODate("2023-12-02T11:00:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d20a")
+      },
+      {
+        heartRate: 76,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-02T11:30:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d212")
+      },
+      {
+        heartRate: 94,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T12:00:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d21b")
+      },
+      {
+        heartRate: 73,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T12:30:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d225")
+      },
+      {
+        heartRate: 74,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-02T13:00:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d230")
+      },
+      {
+        heartRate: 95,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-02T13:30:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d23c")
+      },
+      {
+        heartRate: 90,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-02T14:00:00.000Z"),
+        _id: ObjectId("656f756aab261c144dd6d249")
+      },
+      {
+        heartRate: 88,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T14:30:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d257")
+      },
+      {
+        heartRate: 65,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-02T15:00:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d266")
+      },
+      {
+        heartRate: 66,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T15:30:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d276")
+      },
+      {
+        heartRate: 63,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-02T16:00:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d287")
+      },
+      {
+        heartRate: 91,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-02T16:30:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d299")
+      },
+      {
+        heartRate: 66,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-02T17:00:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d2ac")
+      },
+      {
+        heartRate: 95,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T17:30:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d2c0")
+      },
+      {
+        heartRate: 63,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-02T18:00:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d2d5")
+      },
+      {
+        heartRate: 69,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-02T18:30:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d2eb")
+      },
+      {
+        heartRate: 60,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-02T19:00:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d302")
+      },
+      {
+        heartRate: 75,
+        bloodOxygen: 93,
+        timestamp: ISODate("2023-12-02T19:30:00.000Z"),
+        _id: ObjectId("656f756bab261c144dd6d31a")
+      },
+      {
+        heartRate: 73,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-02T20:00:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d333")
+      },
+      {
+        heartRate: 89,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-02T20:30:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d34d")
+      },
+      {
+        heartRate: 74,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-02T21:00:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d368")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 98,
+        timestamp: ISODate("2023-12-02T21:30:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d384")
+      },
+      {
+        heartRate: 66,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-02T22:00:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d3a1")
+      },
+      {
+        heartRate: 67,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T22:30:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d3bf")
+      },
+      {
+        heartRate: 99,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-02T23:00:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d3de")
+      },
+      {
+        heartRate: 64,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-02T23:30:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d3fe")
+      },
+      {
+        heartRate: 99,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-03T00:00:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d41f")
+      },
+      {
+        heartRate: 91,
+        bloodOxygen: 93,
+        timestamp: ISODate("2023-12-03T00:30:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d441")
+      },
+      {
+        heartRate: 89,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-03T01:00:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d464")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-03T01:30:00.000Z"),
+        _id: ObjectId("656f756cab261c144dd6d488")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-03T02:00:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d4ad")
+      },
+      {
+        heartRate: 90,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-03T02:30:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d4d3")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T03:00:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d4fa")
+      },
+      {
+        heartRate: 70,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T03:30:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d522")
+      },
+      {
+        heartRate: 63,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T04:00:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d54b")
+      },
+      {
+        heartRate: 67,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T04:30:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d575")
+      },
+      {
+        heartRate: 82,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T05:00:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d5a0")
+      },
+      {
+        heartRate: 82,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-03T05:30:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d5cc")
+      },
+      {
+        heartRate: 89,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T06:00:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d5f9")
+      },
+      {
+        heartRate: 86,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-03T06:30:00.000Z"),
+        _id: ObjectId("656f756dab261c144dd6d627")
+      },
+      {
+        heartRate: 94,
+        bloodOxygen: 93,
+        timestamp: ISODate("2023-12-03T07:00:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d656")
+      },
+      {
+        heartRate: 93,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-03T07:30:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d686")
+      },
+      {
+        heartRate: 65,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-03T08:00:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d6b7")
+      },
+      {
+        heartRate: 66,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-03T08:30:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d6e9")
+      },
+      {
+        heartRate: 98,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T09:00:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d71c")
+      },
+      {
+        heartRate: 98,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T09:30:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d750")
+      },
+      {
+        heartRate: 63,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T10:00:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d785")
+      },
+      {
+        heartRate: 64,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-03T10:30:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d7bb")
+      },
+      {
+        heartRate: 73,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-03T11:00:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d7f2")
+      },
+      {
+        heartRate: 86,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-03T11:30:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d82a")
+      },
+      {
+        heartRate: 80,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-03T12:00:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d863")
+      },
+      {
+        heartRate: 80,
+        bloodOxygen: 93,
+        timestamp: ISODate("2023-12-03T12:30:00.000Z"),
+        _id: ObjectId("656f756eab261c144dd6d89d")
+      },
+      {
+        heartRate: 67,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-03T13:00:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6d8d8")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-03T13:30:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6d914")
+      },
+      {
+        heartRate: 70,
+        bloodOxygen: 94,
+        timestamp: ISODate("2023-12-03T14:00:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6d951")
+      },
+      {
+        heartRate: 84,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-03T14:30:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6d98f")
+      },
+      {
+        heartRate: 86,
+        bloodOxygen: 94,
+        timestamp: ISODate("2023-12-03T15:00:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6d9ce")
+      },
+      {
+        heartRate: 89,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-03T15:30:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6da0e")
+      },
+      {
+        heartRate: 74,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T16:00:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6da4f")
+      },
+      {
+        heartRate: 66,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-03T16:30:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6da91")
+      },
+      {
+        heartRate: 60,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T17:00:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6dad4")
+      },
+      {
+        heartRate: 72,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-03T17:30:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6db18")
+      },
+      {
+        heartRate: 91,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-03T18:00:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6db5d")
+      },
+      {
+        heartRate: 65,
+        bloodOxygen: 93,
+        timestamp: ISODate("2023-12-03T18:30:00.000Z"),
+        _id: ObjectId("656f756fab261c144dd6dba3")
+      },
+      {
+        heartRate: 84,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-03T19:00:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dbea")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-03T19:30:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dc32")
+      },
+      {
+        heartRate: 97,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-03T20:00:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dc7b")
+      },
+      {
+        heartRate: 85,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T20:30:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dcc5")
+      },
+      {
+        heartRate: 75,
+        bloodOxygen: 94,
+        timestamp: ISODate("2023-12-03T21:00:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dd10")
+      },
+      {
+        heartRate: 89,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T21:30:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dd5c")
+      },
+      {
+        heartRate: 77,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-03T22:00:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dda9")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-03T22:30:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6ddf7")
+      },
+      {
+        heartRate: 94,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-03T23:00:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6de46")
+      },
+      {
+        heartRate: 70,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-03T23:30:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6de96")
+      },
+      {
+        heartRate: 91,
+        bloodOxygen: 93,
+        timestamp: ISODate("2023-12-04T00:00:00.000Z"),
+        _id: ObjectId("656f7570ab261c144dd6dee7")
+      },
+      {
+        heartRate: 84,
+        bloodOxygen: 94,
+        timestamp: ISODate("2023-12-04T00:30:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6df39")
+      },
+      {
+        heartRate: 82,
+        bloodOxygen: 92,
+        timestamp: ISODate("2023-12-04T01:00:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6df8c")
+      },
+      {
+        heartRate: 82,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-04T01:30:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6dfe0")
+      },
+      {
+        heartRate: 67,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-04T02:00:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e035")
+      },
+      {
+        heartRate: 77,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-04T02:30:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e08b")
+      },
+      {
+        heartRate: 67,
+        bloodOxygen: 97,
+        timestamp: ISODate("2023-12-04T03:00:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e0e2")
+      },
+      {
+        heartRate: 93,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-04T03:30:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e13a")
+      },
+      {
+        heartRate: 82,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-04T04:00:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e193")
+      },
+      {
+        heartRate: 92,
+        bloodOxygen: 96,
+        timestamp: ISODate("2023-12-04T04:30:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e1ed")
+      },
+      {
+        heartRate: 93,
+        bloodOxygen: 91,
+        timestamp: ISODate("2023-12-04T05:00:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e248")
+      },
+      {
+        heartRate: 77,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-04T05:30:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e2a4")
+      },
+      {
+        heartRate: 81,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-04T06:00:00.000Z"),
+        _id: ObjectId("656f7571ab261c144dd6e301")
+      },
+      {
+        heartRate: 91,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-04T06:30:00.000Z"),
+        _id: ObjectId("656f7572ab261c144dd6e35f")
+      },
+      {
+        heartRate: 85,
+        bloodOxygen: 99,
+        timestamp: ISODate("2023-12-04T07:00:00.000Z"),
+        _id: ObjectId("656f7572ab261c144dd6e3be")
+      },
+      {
+        heartRate: 88,
+        bloodOxygen: 95,
+        timestamp: ISODate("2023-12-04T07:30:00.000Z"),
+        _id: ObjectId("656f7572ab261c144dd6e41e")
+      },
+      {
+        heartRate: 62,
+        bloodOxygen: 90,
+        timestamp: ISODate("2023-12-04T08:00:00.000Z"),
+        _id: ObjectId("656f7572ab261c144dd6e47f")
+      },
+      {
+        heartRate: 82,
+        bloodOxygen: 94,
+        timestamp: ISODate("2023-12-04T08:30:00.000Z"),
+        _id: ObjectId("656f7572ab261c144dd6e4e1")
+      }
+    ],

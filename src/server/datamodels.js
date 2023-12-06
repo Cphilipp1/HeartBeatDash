@@ -13,7 +13,7 @@ const readingSchema = new mongoose.Schema({
   },
   timestamp: {
     type: Date,
-    default: Date.now()  // Automatically set the timestamp to the current date and time
+    // default: Date.now()  // Automatically set the timestamp to the current date and time
   }
 });
 

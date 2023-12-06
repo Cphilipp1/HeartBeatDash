@@ -55,7 +55,9 @@ mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', { useNewUrlParser:
 // Endpoint for posting heart data
 app.post('/heartData', async (req, res) => {
   try {
-    const parsedData = JSON.parse(req.body.data);
+    // const parsedData = JSON.parse(req.body.data);
+
+    const parsedData = req.body.data;
     const { deviceId, heartRate, bloodOxygen, apiKey } = parsedData;
 
     if (apiKey !== jwtSecretKey) {
@@ -64,7 +66,8 @@ app.post('/heartData', async (req, res) => {
 
     const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
     if (userWithDevice) {
-      userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date() });
+      // userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date() });
+      userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: parsedData.timestamp });
       await userWithDevice.save();
       res.status(200).json({ message: 'Data updated successfully!' });
     } else {
