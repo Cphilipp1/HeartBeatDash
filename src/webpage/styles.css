@@ -1,14 +1,17 @@
+/* Resetting default margin and padding for various elements */
 body, h1, h2, h3, h4, h5, h6, p, form, button {
     margin: 0;
     padding: 0;
 }
 
+/* General body styling */
 body {
     background-color: #fff; /* White background */
     font-family: Arial, sans-serif;
     color: #333; /* Dark text for contrast */
 }
 
+/* Styling for the main container */
 #container {
     width: 90%;
     max-width: 40em;
@@ -20,6 +23,7 @@ body {
     transition: margin-left 0.3s; 
 }
 
+/* Label styling */
 label {
     display: block;
     font-weight: bold;
@@ -27,7 +31,9 @@ label {
     color: #D32F2F; /* Dark red for labels */
 }
 
-input[type="email"], input[type="password"], input[type="deviceId"], input[type="time"], input[type="number"], input[type="date"] {
+/* Input field styling */
+input[type="email"], input[type="password"], input[type="deviceId"], 
+input[type="time"], input[type="number"], input[type="date"] {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
@@ -36,6 +42,7 @@ input[type="email"], input[type="password"], input[type="deviceId"], input[type=
     font-size: 1em;
 }
 
+/* Button styling */
 button {
     background-color: #D32F2F; /* Red background for buttons */
     color: white;
@@ -47,25 +54,30 @@ button {
     width: 100%;
 }
 
+/* Button hover effect */
 button:hover {
     background-color: #B71C1C; /* Darker red on hover */
 }
 
+/* Paragraph and link styling */
 p, a {
     margin-top: 1.25em;
     font-size: 0.875em;
     color: #555; /* Slightly darker text for readability */
 }
 
+/* Link styling */
 a {
     color: #D32F2F; /* Red links */
     text-decoration: none;
 }
 
+/* Link hover effect */
 a:hover {
     text-decoration: underline;
 }
 
+/* Section styling for various components */
 #weeklySummary, #measurementSettings, #dailyView, #registeredDevices {
     background-color: #FFEBEE; /* Very light red for sections */
     padding: 1em;
@@ -74,22 +86,26 @@ a:hover {
     margin-bottom: 2em;
 }
 
+/* Heading 2 styling */
 h2 {
     color: #D32F2F; /* Red for headings */
     font-size: 1.5em;
     margin-bottom: 1em;
 }
 
+/* Styling for paragraphs in the weekly summary section */
 #weeklySummary p {
     font-size: 1em;
     line-height: 1.6;
     color: #e84c4c;
 }
 
+/* Styling for spans in the weekly summary section */
 #weeklySummary p span {
     font-weight: bold;
 }
 
+/* Sidebar styling */
 #sidebar {
     position: fixed;
     left: -50%; /* Adjusted for correct initial position */
@@ -101,11 +117,13 @@ h2 {
     transition: left 0.3s; 
 }
 
+/* Sidebar list styling */
 #sidebar ul {
     list-style-type: none;
     padding: 0;
 }
 
+/* Sidebar button styling */
 #sidebar ul li button {
     width: 100%;
     padding: 0.5em;
@@ -115,11 +133,13 @@ h2 {
     text-align: left;
 }
 
+/* Content margin styling */
 #content {
     margin-left: 0;
     transition: margin-left 0.3s;
 }
 
+/* Adjustments for expanded sidebar */
 .sidebar-expanded #sidebar {
     left: 0;
 }
@@ -128,6 +148,7 @@ h2 {
     margin-left: 20%;
 }
 
+/* Toggle sidebar button styling */
 #toggleSidebar {
     position: fixed;
     left: 0;
@@ -140,6 +161,7 @@ h2 {
     z-index: 2; 
 }
 
+/* Responsive design adjustments for smaller screens */
 @media (max-width: 768px) {
     #sidebar {
         width: 100%;
@@ -153,13 +175,13 @@ h2 {
     .sidebar-expanded #container {
         margin-left: 0; 
     }
+
     #toggleSidebar {
         z-index: 2; 
     }
 }
 
-
-/* Styles for Team Section */
+/* Styling for the team section and team members */
 .contentSection {
     background-color: #FFEBEE; /* Very light red, consistent with other sections */
     padding: 1em;

@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Sidebar for navigation -->
     <div id="sidebar">
         <button id="toggleSidebar">></button>
         <ul>
@@ -16,11 +17,14 @@
         </ul>
     </div>
 
+    <!-- Main container -->
     <div id="container">
+        <!-- Greeting section -->
         <section id="greeting">
             <h1 id="usernameGreeting">Welcome</h1>
         </section>
         
+        <!-- Weekly Summary section -->
         <section id="weeklySummary">
             <h2>Weekly Summary</h2>
             <p>Average Heart Rate: <span id="avgHeartRate">[Value]</span></p>
@@ -31,9 +35,11 @@
             <p>Maximum Blood Oxygen Level: <span id="maxBloodOxygen">[Value]</span></p>
         </section>
 
+        <!-- Measurement Settings section -->
         <section id="measurementSettings">
             <h2>Measurement Settings</h2>
             <form id="settingsForm">
+                <!-- Input fields for date and time settings -->
                 <label for="date">Date:</label>
                 <input type="date" id="date">
                 <br>
@@ -54,13 +60,14 @@
             </form>
         </section>
 
+        <!-- Detailed Daily View section -->
         <section id="dailyView">
             <h2>Detailed Daily View</h2>
+            <!-- Canvas elements for charts -->
             <canvas id="heartRateChart"></canvas>
             <canvas id="bloodOxygenChart"></canvas>
         </section>
     </div>
-
     <script>
         function updateSummaryStatistics(readings) {
             // Calculate the date of the most recent Sunday
@@ -104,7 +111,6 @@
         let allReadings = [];
 
         document.getElementById('toggleSidebar').addEventListener('click', function() {
-            // document.body.classList.toggle('sidebar-expanded');
             const sidebarExpanded = document.body.classList.toggle('sidebar-expanded');
             this.textContent = sidebarExpanded ? '<' : '>';
         });
@@ -160,31 +166,6 @@
             filterAndUpdateCharts();
         });
 
-        // function filterAndUpdateCharts() {
-        //     if (heartRateChart) heartRateChart.destroy();
-        //     if (bloodOxygenChart) bloodOxygenChart.destroy();
-        //     const startTimeInput = document.getElementById('startTime').value;
-        //     const endTimeInput = document.getElementById('endTime').value;
-        //     const frequency = parseInt(document.getElementById('frequency').value) || 1;
-
-        //     let filteredReadings = allReadings.filter(reading => {
-        //         const readingDate = new Date(reading.timestamp);
-        //         const readingHour = readingDate.getHours();
-        //         const readingMinutes = readingDate.getMinutes();
-
-        //         const [startHour, startMinutes] = startTimeInput ? startTimeInput.split(':').map(Number) : [0, 0];
-        //         const [endHour, endMinutes] = endTimeInput ? endTimeInput.split(':').map(Number) : [23, 59];
-
-        //         return (readingHour > startHour || (readingHour === startHour && readingMinutes >= startMinutes)) &&
-        //             (readingHour < endHour || (readingHour === endHour && readingMinutes <= endMinutes));
-        //     });
-
-        //     filteredReadings = filteredReadings.filter((_, index) => index % frequency === 0);
-
-        //     updateCharts(filteredReadings);
-        // }
-
-
         function filterAndUpdateCharts() {
             if (heartRateChart) heartRateChart.destroy();
             if (bloodOxygenChart) bloodOxygenChart.destroy();
@@ -222,9 +203,6 @@
 
             updateCharts(filteredReadings);
         }
-
-
-
 
         document.getElementById('logoutButton').addEventListener('click', function() {
             localStorage.clear();

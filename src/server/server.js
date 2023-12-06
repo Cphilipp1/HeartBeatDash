@@ -1,30 +1,29 @@
+// Importing required modules
 const mongoose = require('mongoose');
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
+// Importing data models
 const { DeviceData, LoginData } = require('./datamodels');
 
+// Creating an Express application
 const app = express();
 const port = 3000;
 
+// Middleware setup
 app.use(bodyParser.json());
-app.use(cors({
-  origin: '*'
-}));
+app.use(cors({ origin: '*' }));
 
+// Secret key for JWT
 const jwtSecretKey = 'abcdefghijklmnop';
 
+// Middleware to verify the token
 function verifyToken(req, res, next) {
-  let token = req.headers['x-access-token'] || req.headers['authorization']; // Extract the token from header
-  
-  // Check if token exists and has the Bearer prefix
+  let token = req.headers['x-access-token'] || req.headers['authorization'];
   if (token && token.startsWith('Bearer ')) {
-    // Remove Bearer from string
     token = token.slice(7, token.length);
   }
 
@@ -36,90 +35,72 @@ function verifyToken(req, res, next) {
     const decoded = jwt.verify(token, jwtSecretKey);
     req.user = decoded;
   } catch (err) {
-    console.log(err);
+    console.log('Token verification failed:', err);
     return res.status(401).json({ error: 'Invalid Token' });
   }
-  return next();
+  next();
 }
 
+// Helper function to format date strings
 function formatDate(dateString) {
-  console.log(dateString)
   const date = new Date(dateString);
-  console.log(date)
   const optionsDate = { year: 'numeric', month: 'short', day: 'numeric' };
   const optionsTime = { hour: '2-digit', minute: '2-digit', hour12: true };
   return date.toLocaleDateString('en-US', optionsDate) + ', ' + date.toLocaleTimeString('en-US', optionsTime);
 }
 
-mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', {useNewUrlParser: true, useUnifiedTopology: true});
+// MongoDB connection
+mongoose.connect('mongodb://localhost:27017/HeartTrackLogin', { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Endpoint for posting heart data
 app.post('/heartData', async (req, res) => {
   try {
-      console.log("Debug: Inside POST /heartData");
-      console.log(req.body.data)
-      console.log(req.body)
-      // const parsedData = JSON.parse(req.body.data); 
-      const parsedData = req.body.data; 
-      // Extract values and assign them to variables
-      const deviceId = parsedData.deviceId;
-      const heartRate = parsedData.heartRate;
-      const bloodOxygen = parsedData.bloodOxygen;
-      const apiKey = parsedData.apiKey;
-    
-      if (apiKey !== "abcdefghijklmnop") {
-        return res.status(401).json({ message: 'Invalid API key' });
-      }
+    const parsedData = JSON.parse(req.body.data);
+    const { deviceId, heartRate, bloodOxygen, apiKey } = parsedData;
 
-      // Find the user who has the matching device ID
-      const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
-      
-      if (userWithDevice) {
-          // Append the new reading to the user's data
-          userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date(parsedData.timestamp)});
-          await userWithDevice.save();
-          console.log("data saved");
-          res.status(200).json({ message: 'Data updated successfully!' });
-      } else {
-          console.log("NO USER FOUND")
-          res.status(404).json({ message: 'Device not found' });
-      }
+    if (apiKey !== jwtSecretKey) {
+      return res.status(401).json({ message: 'Invalid API key' });
+    }
+
+    const userWithDevice = await DeviceData.findOne({ deviceIds: deviceId });
+    if (userWithDevice) {
+      userWithDevice.readings.push({ heartRate, bloodOxygen, timestamp: new Date() });
+      await userWithDevice.save();
+      res.status(200).json({ message: 'Data updated successfully!' });
+    } else {
+      res.status(404).json({ message: 'Device not found' });
+    }
   } catch (error) {
-      console.error("Error in /heartData endpoint:", error);
-      res.status(500).json({ message: 'Internal Server Error' });
+    console.error('Error in /heartData endpoint:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
+// Endpoint for user login
 app.post('/api/login', async (req, res) => {
-  console.log("Debug: Inside POST /api/login");
-  console.log(req.body);
-
   const { email, password } = req.body;
-
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
-  const records = await LoginData.findOne({ userName: email });
+  const userRecord = await LoginData.findOne({ userName: email });
 
-  console.log(records)
-
-  if (records.length === 0) {
+  if (!userRecord) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
-  const isPasswordValid = bcrypt.compareSync(password, records.password);
 
-
+  const isPasswordValid = bcrypt.compareSync(password, userRecord.password);
   if (!isPasswordValid) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
 
-  const token = jwt.sign({ id: records._id }, 'abcdefghijklmnop', { expiresIn: '1h' });
+  const token = jwt.sign({ id: userRecord._id }, jwtSecretKey, { expiresIn: '1h' });
   res.status(200).json({ token });
+  console.log(`Login successful for user: ${email}`);
 });
 
+// Endpoint for user registration
 app.post('/api/register', async (req, res) => {
-  console.log("Debug: Inside POST /api/register");
-
   const { email, password, deviceId } = req.body;
   if (!email || !password) {
       return res.status(400).json({ error: 'Email and password are required' });
@@ -133,170 +114,138 @@ app.post('/api/register', async (req, res) => {
 
       const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
       const newLogin = await LoginData.create({ userName: email, password: hashedPassword, deviceIds: [deviceId] });
-      console.log('User inserted with message:', newLogin);
+      console.log('New user registered:', email);
 
       const newDeviceData = new DeviceData({ userName: email, deviceIds: [deviceId], readings: [] });
-      console.log('Device Data to be inserted:', newDeviceData);
-      const deviceDataMessage = await newDeviceData.save();
-      console.log('Device Data inserted with message:', deviceDataMessage);
+      await newDeviceData.save();
       res.status(201).json({ message: 'User registered successfully' });
-  } catch (err) {
-      console.error('Failed to insert user:', err);
+  } catch (error) {
+      console.error('Registration failed:', error);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
+// Endpoint to get device data for a user
 app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
   try {
     const userName = req.params.userName;
+    const deviceData = await DeviceData.findOne({ userName });
 
-    // Find the user's login data to get the deviceId
-    const loginData = await LoginData.findOne({ userName: userName });
-
-    if (!loginData) {
-      return res.status(404).json({ error: 'User not found' });
+    if (!deviceData) {
+      return res.status(404).json({ error: 'Device data not found' });
     }
-
-    // Use the deviceId to get the device data
-    const deviceData = await DeviceData.findOne({ deviceId: loginData.deviceId });
-
-    console.log(deviceData)
 
     const formattedReadings = deviceData.readings.map(reading => ({
       ...reading._doc,
       timestamp: formatDate(reading.timestamp)
     }));
-    if (!deviceData) {
-      return res.status(404).json({ error: 'Device data not found' });
-    }
 
-    // Send the readings back
-    // res.status(200).json({ readings: deviceData.readings });
     res.status(200).json({ readings: formattedReadings });
+    console.log(`Device data retrieved for user: ${userName}`);
   } catch (error) {
-    console.error("Error in /api/getDeviceData endpoint:", error);
+    console.error("Error in /api/getDeviceData:", error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
+// Endpoint to add a new device to a user
 app.post('/addDevice', verifyToken, async (req, res) => {
   try {
       const { userName, newDeviceId } = req.body;
 
-      // Check if userName and newDeviceId are provided
       if (!userName || !newDeviceId) {
           return res.status(400).json({ message: 'Username and new device ID are required' });
       }
 
-      // Add the new device ID to the user's device list if it's not already there
-      const result = await DeviceData.updateOne(
-          { userName: userName },
-          { $addToSet: { deviceIds: newDeviceId } }
-      );
+      const result = await DeviceData.updateOne({ userName }, { $addToSet: { deviceIds: newDeviceId } });
 
       if (result.matchedCount === 0) {
-          // No user found with the given username
           res.status(404).json({ message: 'User not found' });
       } else if (result.modifiedCount === 0) {
-          // The device ID is already in the user's device list
           res.status(200).json({ message: 'Device ID already registered to this user' });
       } else {
-          // New device ID successfully added
           res.status(200).json({ message: 'Device ID successfully added to user' });
+          console.log(`New device added for user: ${userName}`);
       }
   } catch (error) {
-      console.error("Error in /addDevice endpoint:", error);
+      console.error("Error in /addDevice:", error);
       res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
+// Endpoint to retrieve a user's devices
 app.get('/getUserDevices/:userName', verifyToken, async (req, res) => {
   try {
       const userName = req.params.userName;
-
-      // Find the user by userName
-      const user = await DeviceData.findOne({ userName: userName });
+      const user = await DeviceData.findOne({ userName });
 
       if (user) {
-          // Respond with the list of device IDs
           res.status(200).json({ deviceIds: user.deviceIds });
+          console.log(`Device IDs retrieved for user: ${userName}`);
       } else {
-          // User not found
           res.status(404).json({ message: 'User not found' });
       }
   } catch (error) {
-      console.error("Error in /getUserDevices endpoint:", error);
+      console.error("Error in /getUserDevices:", error);
       res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
+// Endpoint to delete a device from a user's list
 app.post('/deleteDevice', verifyToken, async (req, res) => {
   try {
       const { userName, deviceId } = req.body;
 
-      // Check if userName and deviceId are provided
       if (!userName || !deviceId) {
           return res.status(400).json({ message: 'Username and device ID are required' });
       }
 
-      // Remove the device ID from the user's device list
-      const result = await DeviceData.updateOne(
-          { userName: userName },
-          { $pull: { deviceIds: deviceId } }
-      );
+      const result = await DeviceData.updateOne({ userName }, { $pull: { deviceIds: deviceId } });
 
       if (result.matchedCount === 0) {
-          // No user found with the given username
           res.status(404).json({ message: 'User not found' });
       } else if (result.modifiedCount === 0) {
-          // The device ID is not in the user's device list
           res.status(200).json({ message: 'Device ID not found in user\'s list' });
       } else {
-          // Device ID successfully removed
           res.status(200).json({ message: 'Device ID successfully removed from user' });
+          console.log(`Device removed for user: ${userName}`);
       }
   } catch (error) {
-      console.error("Error in /deleteDevice endpoint:", error);
+      console.error("Error in /deleteDevice:", error);
       res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
+// Endpoint to update a user's password
 app.post('/updatePassword', verifyToken, async (req, res) => {
   try {
       const { userName, currentPassword, newPassword } = req.body;
-      console.log("INSIDE UPDATE PASSWORD")
-      console.log(req.body)
-      // Validate input
+
       if (!userName || !currentPassword || !newPassword) {
           return res.status(400).json({ message: 'Username, current password, and new password are required' });
       }
 
-      // Find the user by userName
-      const user = await LoginData.findOne({ userName: userName });
+      const user = await LoginData.findOne({ userName });
       if (!user) {
           return res.status(404).json({ message: 'User not found' });
       }
 
-      // Compare the current password with the stored hash
       const isMatch = bcrypt.compareSync(currentPassword, user.password);
       if (!isMatch) {
           return res.status(401).json({ message: 'Incorrect password' });
       }
 
-      // Hash the new password
-      const hashedNewPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
-
-      // Update the user's password
-      user.password = hashedNewPassword;
+      user.password = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
       await user.save();
-
       res.status(200).json({ message: 'Password updated successfully' });
+      console.log(`Password updated for user: ${userName}`);
   } catch (error) {
-      console.error("Error in /updatePassword endpoint:", error);
+      console.error("Error in /updatePassword:", error);
       res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
+// Listening on the specified port
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });

@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+document.getElementById('backButton').addEventListener('click', function() {
+    window.history.back();
+});
+
 function fetchRegisteredDevices(userName) {
     const token = localStorage.getItem('token');
     fetch(`http://${localStorage.getItem("ip")}:3000/getUserDevices/${userName}`,
