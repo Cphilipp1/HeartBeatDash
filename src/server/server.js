@@ -120,7 +120,7 @@ app.post('/api/register', async (req, res) => {
           return res.status(400).json({ error: 'Email is already registered' });
       }
       // Check if the device is already registered under a different user
-      const existingDevice = await DeviceData.findOne({ deviceIds: newDeviceId });
+      const existingDevice = await DeviceData.findOne({ deviceIds: deviceId });
       if (existingDevice && existingDevice.userName !== userName) {
           return res.status(400).json({ message: 'Device ID is already registered under a different user' });
       }
