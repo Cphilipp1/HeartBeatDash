@@ -119,6 +119,11 @@ app.post('/api/register', async (req, res) => {
       if (existingUser) {
           return res.status(400).json({ error: 'Email is already registered' });
       }
+      // Check if the device is already registered under a different user
+      const existingDevice = await DeviceData.findOne({ deviceIds: newDeviceId });
+      if (existingDevice && existingDevice.userName !== userName) {
+          return res.status(400).json({ message: 'Device ID is already registered under a different user' });
+      }
 
       const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
       const newLogin = await LoginData.create({ userName: email, password: hashedPassword, deviceIds: [deviceId] });
@@ -161,27 +166,42 @@ app.get('/api/getDeviceData/:userName', verifyToken, async (req, res) => {
 
 // Endpoint to add a new device to a user
 app.post('/addDevice', verifyToken, async (req, res) => {
-  try {
-      const { userName, newDeviceId } = req.body;
+    try {
+        const { userName, newDeviceId } = req.body;
 
-      if (!userName || !newDeviceId) {
-          return res.status(400).json({ message: 'Username and new device ID are required' });
-      }
+        if (!userName || !newDeviceId) {
+            return res.status(400).json({ message: 'Username and new device ID are required' });
+        }
 
-      const result = await DeviceData.updateOne({ userName }, { $addToSet: { deviceIds: newDeviceId } });
+        // Check if the device is already registered under a different user
+        const existingDevice = await DeviceData.findOne({ deviceIds: newDeviceId });
+        if (existingDevice && existingDevice.userName !== userName) {
+            return res.status(400).json({ message: 'Device ID is already registered under a different user' });
+        }
 
-      if (result.matchedCount === 0) {
-          res.status(404).json({ message: 'User not found' });
-      } else if (result.modifiedCount === 0) {
-          res.status(200).json({ message: 'Device ID already registered to this user' });
-      } else {
-          res.status(200).json({ message: 'Device ID successfully added to user' });
-          console.log(`New device added for user: ${userName}`);
-      }
-  } catch (error) {
-      console.error("Error in /addDevice:", error);
-      res.status(500).json({ message: 'Internal Server Error' });
-  }
+        // Add the device to the user's list of devices in DeviceData
+        const deviceDataResult = await DeviceData.updateOne({ userName }, { $addToSet: { deviceIds: newDeviceId } });
+
+        if (deviceDataResult.matchedCount === 0) {
+            res.status(404).json({ message: 'User not found in DeviceData' });
+        } else if (deviceDataResult.modifiedCount === 0) {
+            res.status(200).json({ message: 'Device ID already registered to this user in DeviceData' });
+        } else {
+            // Add the device to the user's list of devices in LoginData as well
+            const loginDataResult = await LoginData.updateOne({ userName }, { $addToSet: { deviceIds: newDeviceId } });
+
+            if (loginDataResult.modifiedCount === 0) {
+                res.status(200).json({ message: 'Device ID successfully added to user in DeviceData, but not in LoginData' });
+            } else {
+                res.status(200).json({ message: 'Device ID successfully added to user in both DeviceData and LoginData' });
+            }
+
+            console.log(`New device added for user: ${userName}`);
+        }
+    } catch (error) {
+        console.error("Error in /addDevice:", error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 });
 
 // Endpoint to retrieve a user's devices
@@ -211,14 +231,23 @@ app.post('/deleteDevice', verifyToken, async (req, res) => {
           return res.status(400).json({ message: 'Username and device ID are required' });
       }
 
-      const result = await DeviceData.updateOne({ userName }, { $pull: { deviceIds: deviceId } });
+      // Remove the device from the user's DeviceData
+      const deviceDataResult = await DeviceData.updateOne({ userName }, { $pull: { deviceIds: deviceId } });
 
-      if (result.matchedCount === 0) {
-          res.status(404).json({ message: 'User not found' });
-      } else if (result.modifiedCount === 0) {
-          res.status(200).json({ message: 'Device ID not found in user\'s list' });
+      if (deviceDataResult.matchedCount === 0) {
+          res.status(404).json({ message: 'User not found in DeviceData' });
+      } else if (deviceDataResult.modifiedCount === 0) {
+          res.status(200).json({ message: 'Device ID not found in user\'s list in DeviceData' });
       } else {
-          res.status(200).json({ message: 'Device ID successfully removed from user' });
+          // Remove the device from the user's LoginData if it exists in DeviceData
+          const loginDataResult = await LoginData.updateOne({ userName }, { $pull: { deviceIds: deviceId } });
+
+          if (loginDataResult.modifiedCount === 0) {
+              res.status(200).json({ message: 'Device ID successfully removed from user in DeviceData, not found in LoginData' });
+          } else {
+              res.status(200).json({ message: 'Device ID successfully removed from user in both DeviceData and LoginData' });
+          }
+
           console.log(`Device removed for user: ${userName}`);
       }
   } catch (error) {
@@ -226,6 +255,7 @@ app.post('/deleteDevice', verifyToken, async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
 
 // Endpoint to update a user's password
 app.post('/updatePassword', verifyToken, async (req, res) => {
