@@ -41,16 +41,6 @@ function verifyToken(req, res, next) {
   next();
 }
 
-// Webhook endpoint
-app.post('/notification', (req, res) => {
-  const data = req.body; // Data received from the webhook
-
-  // Emit the data to all connected clients
-  io.emit('popup', data);
-
-  res.status(200).json({ message: 'Notification received and forwarded' });
-});
-
 // Helper function to format date strings
 function formatDate(dateString) {
   const date = new Date(dateString);
