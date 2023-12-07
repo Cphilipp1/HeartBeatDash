@@ -215,3 +215,30 @@ h2 {
     line-height: 1.6;
     color: #333; /* Dark text for contrast */
 }
+
+/* Styling for the countdown timer section */
+#countdownTimer {
+    background-color: #FFEBEE; /* Very light red, consistent with other sections */
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+    text-align: center; /* Centering the content for better focus on countdown */
+}
+
+#countdownTimer h2 {
+    color: #D32F2F; /* Red for headings, consistent with other h2 elements */
+    margin-bottom: 0.5em;
+}
+
+#countdownTimer p {
+    font-size: 1.2em; /* Slightly larger font size for emphasis */
+    line-height: 1.6;
+    color: #333; /* Dark text for contrast, consistent with body color */
+}
+
+#countdownDisplay {
+    font-weight: bold; /* Making the countdown time bold */
+    color: #D32F2F; /* Using the dark red for emphasis */
+    font-size: 1.5em; /* Larger font size for better visibility */
+}
